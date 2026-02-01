@@ -13,6 +13,9 @@
 		8D17A5DA2F2FEF93003B7DC1 /* OpenGlRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17A5D32F2FEF93003B7DC1 /* OpenGlRenderer.cpp */; };
 		8D17A5DB2F2FEF93003B7DC1 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17A5D72F2FEF93003B7DC1 /* Engine.cpp */; };
 		8D17A5DC2F2FEF93003B7DC1 /* math_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17A5D82F2FEF93003B7DC1 /* math_utils.cpp */; };
+		8D7001442F2FF3C50075F49D /* Level1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D7001422F2FF3C50075F49D /* Level1.cpp */; };
+		8D7001472F2FF9F50075F49D /* Rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D7001452F2FF9F50075F49D /* Rectangle.cpp */; };
+		8D70014A2F30004D0075F49D /* Paddle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D7001482F30004D0075F49D /* Paddle.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +50,12 @@
 		8D17A5D72F2FEF93003B7DC1 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
 		8D17A5D82F2FEF93003B7DC1 /* math_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = math_utils.cpp; sourceTree = "<group>"; };
 		8D17A5D92F2FEF93003B7DC1 /* Scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
+		8D7001422F2FF3C50075F49D /* Level1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level1.cpp; sourceTree = "<group>"; };
+		8D7001432F2FF3C50075F49D /* Level1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Level1.hpp; sourceTree = "<group>"; };
+		8D7001452F2FF9F50075F49D /* Rectangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rectangle.cpp; sourceTree = "<group>"; };
+		8D7001462F2FF9F50075F49D /* Rectangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Rectangle.hpp; sourceTree = "<group>"; };
+		8D7001482F30004D0075F49D /* Paddle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Paddle.cpp; sourceTree = "<group>"; };
+		8D7001492F30004D0075F49D /* Paddle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Paddle.hpp; sourceTree = "<group>"; };
 		8D90DAAB2F2FEDD900BC93F7 /* MakeEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MakeEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -95,6 +104,43 @@
 			path = Engine;
 			sourceTree = "<group>";
 		};
+		8D70013E2F2FF3930075F49D /* SoloPong */ = {
+			isa = PBXGroup;
+			children = (
+				8D7001412F2FF3B00075F49D /* Renderables */,
+				8D7001402F2FF3A90075F49D /* GameObjects */,
+				8D70013F2F2FF3A00075F49D /* Scenes */,
+			);
+			path = SoloPong;
+			sourceTree = "<group>";
+		};
+		8D70013F2F2FF3A00075F49D /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				8D7001422F2FF3C50075F49D /* Level1.cpp */,
+				8D7001432F2FF3C50075F49D /* Level1.hpp */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		8D7001402F2FF3A90075F49D /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				8D7001482F30004D0075F49D /* Paddle.cpp */,
+				8D7001492F30004D0075F49D /* Paddle.hpp */,
+			);
+			path = GameObjects;
+			sourceTree = "<group>";
+		};
+		8D7001412F2FF3B00075F49D /* Renderables */ = {
+			isa = PBXGroup;
+			children = (
+				8D7001452F2FF9F50075F49D /* Rectangle.cpp */,
+				8D7001462F2FF9F50075F49D /* Rectangle.hpp */,
+			);
+			path = Renderables;
+			sourceTree = "<group>";
+		};
 		8D90DAA22F2FEDD900BC93F7 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +161,7 @@
 		8D90DAAD2F2FEDD900BC93F7 /* MakeEngine */ = {
 			isa = PBXGroup;
 			children = (
+				8D70013E2F2FF3930075F49D /* SoloPong */,
 				8D17A5C92F2FEF93003B7DC1 /* Engine */,
 				8D17A5C22F2FEE8B003B7DC1 /* main.mm */,
 			);
@@ -182,6 +229,9 @@
 				8D17A5DB2F2FEF93003B7DC1 /* Engine.cpp in Sources */,
 				8D17A5DC2F2FEF93003B7DC1 /* math_utils.cpp in Sources */,
 				8D17A5DA2F2FEF93003B7DC1 /* OpenGlRenderer.cpp in Sources */,
+				8D7001442F2FF3C50075F49D /* Level1.cpp in Sources */,
+				8D7001472F2FF9F50075F49D /* Rectangle.cpp in Sources */,
+				8D70014A2F30004D0075F49D /* Paddle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
