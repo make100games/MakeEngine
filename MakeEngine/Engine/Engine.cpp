@@ -7,7 +7,7 @@
 
 #include "Engine.hpp"
 #include <memory>
-//#include "Level1.hpp"
+#include "Level1.hpp"
 #include "OpenGlRenderer.hpp"
 #include <iostream>
 #include <utility>
@@ -116,7 +116,7 @@ Bounds Engine::canvasBounds() {
 }
 
 void Engine::addScenes() {
-    //scenes.push_back(std::make_unique<Level1>());
+    scenes.push_back(std::make_unique<Level1>());
 }
 
 /**
