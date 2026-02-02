@@ -119,16 +119,11 @@ void Engine::addScenes() {
     scenes.push_back(std::make_unique<Level1>());
 }
 
-/**
- We want to make sure that key-up events are only delegated to the game objects if the key that popped back up is also the key that is currently pressed down. Otherwise we just ignore it. This leads to much more intuitive key input handling for games.
- */
 void Engine::onKeyInput(KeyInput input) {
-    if(input.interaction == KeyInteraction::KeyUp && currentlyPressedKey && *currentlyPressedKey == input.keyCode) {
+    if(input.interaction == KeyInteraction::KeyUp) {
         delegateKeyInputToGameObjects(input);
-        currentlyPressedKey = nullptr;
     } else if(input.interaction == KeyInteraction::KeyDown) {
         delegateKeyInputToGameObjects(input);
-        currentlyPressedKey = std::make_unique<KeyCode>(input.keyCode);
     }
 }
 

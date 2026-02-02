@@ -52,6 +52,8 @@ private:
     std::unique_ptr<Renderer> renderer;
     std::vector<std::unique_ptr<Scene>> scenes;
     Bounds myCanvasBounds;
+    
+    // This is deprecated!
     std::unique_ptr<KeyCode> currentlyPressedKey;    // Not sure if I like this but it makes working with the key input in the GameObjects much more pleasant and it also makes the API behave the way you kind of expect in a GameEngine
     
     void addScenes();

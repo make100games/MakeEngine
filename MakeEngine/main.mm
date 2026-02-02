@@ -60,16 +60,20 @@ void runApp() {
 
                     switch (keyChar) {
                         case NSLeftArrowFunctionKey:
+                            NSLog(@"Key down: Left Arrow");
                             gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyDown, KeyCode::LeftArrow });
                             break;
                         case NSRightArrowFunctionKey:
+                            NSLog(@"Key down: Right Arrow");
                             gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyDown, KeyCode::RightArrow });
                             break;
                         case NSUpArrowFunctionKey:
+                            NSLog(@"Key down: Up Arrow");
                             gameEngine -> onKeyInput(KeyInput {
                                 KeyInteraction::KeyDown, KeyCode::UpArrow });
                             break;
                         case NSDownArrowFunctionKey:
+                            NSLog(@"Key down: Down Arrow");
                             gameEngine -> onKeyInput(KeyInput {
                                 KeyInteraction::KeyDown, KeyCode::DownArrow });
                             break;
@@ -91,15 +95,19 @@ void runApp() {
 
                     switch (keyChar) {
                         case NSLeftArrowFunctionKey:
+                            NSLog(@"Key up: Left Arrow");
                             gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyUp, KeyCode::LeftArrow });
                             break;
                         case NSRightArrowFunctionKey:
+                            NSLog(@"Key up: Right Arrow");
                             gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyUp, KeyCode::RightArrow });
                             break;
                         case NSUpArrowFunctionKey:
+                            NSLog(@"Key up: Up Arrow");
                             gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyUp, KeyCode::UpArrow });
                             break;
                         case NSDownArrowFunctionKey:
+                            NSLog(@"Key up: Down Arrow");
                             gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyUp, KeyCode::DownArrow });
                             break;
                         case ' ':   // Space

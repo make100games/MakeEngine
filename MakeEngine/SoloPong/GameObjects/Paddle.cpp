@@ -89,8 +89,14 @@ void Paddle::onCollision(Collider other) {
     
 }
 
+// TODO: Improve movement here. Currently the following is not working yet:
+//  1. Hold left arrow key -> Move left -> This is ok
+//  2. Press and hold right arrow key -> Move right -> This is ok
+//  3. Release right arrow key -> Should move back to left as left still pressed -> Not working. Paddle stands still
+//  I need to keep track of currently pressed keys so that I can restore the movement properly when keys are released
+
 void Paddle::onKeyInput(KeyInput keyInput) {
-    std::cout << "Key Input: " << keyInput << std::endl;
+    //std::cout << "Key Input: " << keyInput << std::endl;
     if(keyInput.interaction == KeyInteraction::KeyDown) {
         switch(keyInput.keyCode) {
             case KeyCode::LeftArrow:
@@ -109,8 +115,22 @@ void Paddle::onKeyInput(KeyInput keyInput) {
                 break;
         }
     } else if(keyInput.interaction == KeyInteraction::KeyUp) {
-        xVelocity = 0.0f;
-        yVelocity = 0.0f;
+        switch(keyInput.keyCode) {
+            case KeyCode::LeftArrow:
+                if(xVelocity < 0) xVelocity = 0.0f;
+                break;
+            case KeyCode::RightArrow:
+                if(xVelocity > 0) xVelocity = 0.0f;
+                break;
+            case KeyCode::UpArrow:
+                if(yVelocity < 0) yVelocity = 0.0f;
+                break;
+            case KeyCode::DownArrow:
+                if(yVelocity > 0) yVelocity = 0.0f;
+                break;
+            default:
+                break;
+        }
     }
 }
 
