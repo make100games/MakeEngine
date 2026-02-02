@@ -9,6 +9,7 @@
 #include "Rectangle.hpp"
 
 static const std::string tag = "Paddle";
+static const float paddleVelocity = 500.0f;
 
 Paddle::Paddle():myTransform(Transform { 0.0f, 0.0f, tag }) {
     // Note: Place top left vertex at 0,0. Otherwise you bake in an offset
@@ -41,7 +42,16 @@ void Paddle::initialize() {
 }
 
 void Paddle::update(float deltaTime) {
-    
+    if(myTransform.x < myCanvasBounds.left) {
+        xVelocity = 0.0f;
+        myTransform = myTransform.copyWithX(myCanvasBounds.left);
+    } else if((myTransform.x + width) > myCanvasBounds.right) {
+        xVelocity = 0.0f;
+        myTransform = myTransform.copyWithX(myCanvasBounds.right - width);
+    } else {
+        myTransform.x += xVelocity * deltaTime;
+    }
+    myCollider = myCollider.copyWithX(myTransform.x).copyWithY(myTransform.y);
 }
 
 const std::unique_ptr<Renderable>& Paddle::renderable() const {
@@ -65,7 +75,20 @@ void Paddle::onCollision(Collider other) {
 }
 
 void Paddle::onKeyInput(KeyInput keyInput) {
-    
+    if(keyInput.interaction == KeyInteraction::KeyDown) {
+        switch(keyInput.keyCode) {
+            case KeyCode::LeftArrow:
+                xVelocity = -paddleVelocity;
+                break;
+            case KeyCode::RightArrow:
+                xVelocity = paddleVelocity;
+                break;
+            default:
+                break;
+        }
+    } else if(keyInput.interaction == KeyInteraction::KeyUp) {
+        xVelocity = 0.0f;
+    }
 }
 
 
