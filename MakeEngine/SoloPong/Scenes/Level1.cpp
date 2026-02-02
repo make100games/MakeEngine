@@ -11,6 +11,7 @@
 #include <vector>
 #include "GameObject.hpp"
 #include "Paddle.hpp"
+#include "Ball.hpp"
 
 Level1::Level1() {
     
@@ -27,6 +28,7 @@ void Level1::onCanvasBoundsChanged(Bounds bounds) {
 void Level1::onStart() {
     // Add paddle and ball
     myGameObjects.push_back(std::make_unique<Paddle>());
+    myGameObjects.push_back(std::make_unique<Ball>());
 }
 
 void Level1::update() {
