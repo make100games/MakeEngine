@@ -9,6 +9,7 @@
 #define KeyInput_hpp
 
 #include <stdio.h>
+#include <ostream>
 
 enum class KeyInteraction {
     KeyDown,
@@ -18,6 +19,8 @@ enum class KeyInteraction {
 enum class KeyCode {
     LeftArrow,
     RightArrow,
+    UpArrow,
+    DownArrow,
     Space
 };
 

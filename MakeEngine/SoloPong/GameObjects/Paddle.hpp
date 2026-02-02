@@ -44,6 +44,7 @@ private:
     Bounds myCanvasBounds;
     Collider myCollider;
     float xVelocity = 0.0f;
+    float yVelocity = 0.0f;
     float width = 150.0f;
     float height = 20.0f;
 };

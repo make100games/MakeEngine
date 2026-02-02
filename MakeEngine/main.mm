@@ -65,6 +65,14 @@ void runApp() {
                         case NSRightArrowFunctionKey:
                             gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyDown, KeyCode::RightArrow });
                             break;
+                        case NSUpArrowFunctionKey:
+                            gameEngine -> onKeyInput(KeyInput {
+                                KeyInteraction::KeyDown, KeyCode::UpArrow });
+                            break;
+                        case NSDownArrowFunctionKey:
+                            gameEngine -> onKeyInput(KeyInput {
+                                KeyInteraction::KeyDown, KeyCode::DownArrow });
+                            break;
                         case ' ':   // Space
                             gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyDown, KeyCode::Space });
                             break;
@@ -87,6 +95,12 @@ void runApp() {
                             break;
                         case NSRightArrowFunctionKey:
                             gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyUp, KeyCode::RightArrow });
+                            break;
+                        case NSUpArrowFunctionKey:
+                            gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyUp, KeyCode::UpArrow });
+                            break;
+                        case NSDownArrowFunctionKey:
+                            gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyUp, KeyCode::DownArrow });
                             break;
                         case ' ':   // Space
                             gameEngine -> onKeyInput(KeyInput { KeyInteraction::KeyUp, KeyCode::Space });

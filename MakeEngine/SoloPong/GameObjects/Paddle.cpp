@@ -7,6 +7,8 @@
 
 #include "Paddle.hpp"
 #include "Rectangle.hpp"
+#include <iostream>
+#include "Logging.hpp"
 
 static const std::string tag = "Paddle";
 static const float paddleVelocity = 500.0f;
@@ -42,6 +44,7 @@ void Paddle::initialize() {
 }
 
 void Paddle::update(float deltaTime) {
+    // Horizontal movement
     if(myTransform.x < myCanvasBounds.left) {
         xVelocity = 0.0f;
         myTransform = myTransform.copyWithX(myCanvasBounds.left);
@@ -51,6 +54,18 @@ void Paddle::update(float deltaTime) {
     } else {
         myTransform.x += xVelocity * deltaTime;
     }
+    
+    // Vertical movement
+    if(myTransform.y < myCanvasBounds.top) {
+        yVelocity = 0.0f;
+        myTransform = myTransform.copyWithY(myCanvasBounds.top);
+    } else if((myTransform.y + height) > myCanvasBounds.bottom) {
+        yVelocity = 0.0f;
+        myTransform = myTransform.copyWithY(myCanvasBounds.bottom - height);
+    } else {
+        myTransform.y += yVelocity * deltaTime;
+    }
+    
     myCollider = myCollider.copyWithX(myTransform.x).copyWithY(myTransform.y);
 }
 
@@ -75,6 +90,7 @@ void Paddle::onCollision(Collider other) {
 }
 
 void Paddle::onKeyInput(KeyInput keyInput) {
+    std::cout << "Key Input: " << keyInput << std::endl;
     if(keyInput.interaction == KeyInteraction::KeyDown) {
         switch(keyInput.keyCode) {
             case KeyCode::LeftArrow:
@@ -83,11 +99,18 @@ void Paddle::onKeyInput(KeyInput keyInput) {
             case KeyCode::RightArrow:
                 xVelocity = paddleVelocity;
                 break;
+            case KeyCode::UpArrow:
+                yVelocity = -paddleVelocity;
+                break;
+            case KeyCode::DownArrow:
+                yVelocity = paddleVelocity;
+                break;
             default:
                 break;
         }
     } else if(keyInput.interaction == KeyInteraction::KeyUp) {
         xVelocity = 0.0f;
+        yVelocity = 0.0f;
     }
 }
 
