@@ -46,6 +46,8 @@ private:
     float xVelocity = 0.0f;
     float yVelocity = 0.0f;
     float size = 20.0f;
+    
+    void performAngleBasedBounce(Collider other);
 };
 
 #endif /* Ball_hpp */
