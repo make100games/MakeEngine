@@ -133,7 +133,6 @@ void Ball::onCollision(Collider other) {
 }
 
 void Ball::performAngleBasedBounce(Collider other) {
-    std::cout << "performAngleBasedBounce \n";
     // The following is also courtesy of Chat GPT. Gettin' a little too comfortable having it do all of the algorithmic heavy lifting for me. But I do understand what is happening here :)
     // This should only be called if we collide with the paddle so we can assume that the other collider is the collider of the paddle
     float ballCenterX = myCollider.x + (myCollider.width / 2);
@@ -154,9 +153,13 @@ void Ball::performAngleBasedBounce(Collider other) {
     if(myCollider.y < other.y) {
         // Hitting top of paddle
         yVelocity = -speed * std::cos(normalized * maxBounceAngle);
+        myTransform.y = other.y - size;
+        std::cout << "Hit top of paddle \n";
     } else if(myCollider.y > other.y) {
         // Hitting bottom of paddle
         yVelocity = speed * std::cos(normalized * maxBounceAngle);
+        myTransform.y = other.y + other.height;
+        std::cout << "Hit bottom of paddle \n";
     }
 }
 
