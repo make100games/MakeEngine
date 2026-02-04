@@ -177,6 +177,26 @@ void Ball::performAngleBasedBounce(Collider other) {
     }
 }
 
+void Ball::bounceOffBallDependingOnPaddleSpeed(Collider other, Vec2 paddleNormal) {
+    // Calculate reflected velocity
+    auto ballVelocity = Vec2 { xVelocity, yVelocity };
+    Vec2 reflected = ballVelocity - 2.0f * dot(ballVelocity, paddleNormal) * paddleNormal;
+    
+    // Calculate paddle velocity along collision normal
+    auto otherXVelocity = other.gameObject->rigidBody().xVelocity;
+    auto otherYVelocity = other.gameObject->rigidBody().yVelocity;
+    auto paddleVelocity = Vec2 { otherXVelocity, otherYVelocity };
+    float paddleSpeedAlongNormal = dot(paddleVelocity, paddleNormal);
+    
+    // Add influence of paddle speed to reflected ball speed
+    reflected += paddleNormal * paddleSpeedAlongNormal;
+    
+    // TODO clamp speed
+    
+    // Apply velocity
+    ballVelocity = reflected;
+}
+
 void Ball::onKeyInput(KeyInput input) {
     
 }

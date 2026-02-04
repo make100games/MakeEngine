@@ -33,3 +33,11 @@ void ortho(float left, float right, float bottom, float top, float near, float f
     matrix[14] = -(far + near) / (far - near);
     matrix[15] = 1.0f;
 }
+
+float dot(const Vec2& a, const Vec2& b) {
+    return a.x * b.x + a.y * b.y;
+}
+
+float dot(const Vec3& a, const Vec3& b) {
+    return a.x * b.x + a.y * b.y + a.z * b.z;
+}

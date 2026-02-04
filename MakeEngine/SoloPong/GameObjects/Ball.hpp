@@ -17,6 +17,8 @@
 #include "Collider.hpp"
 #include "KeyInput.hpp"
 #include "RigidBody.hpp"
+#include "Vec2.hpp"
+#include "math_utils.hpp"
 
 class Ball : public GameObject {
 public:
@@ -54,6 +56,8 @@ private:
     void performAngleBasedBounce(Collider other);
     
     void increaseSpeedOverTime(float deltaTime);
+    
+    void bounceOffBallDependingOnPaddleSpeed(Collider other, Vec2 paddleNormal);
 };
 
 #endif /* Ball_hpp */
