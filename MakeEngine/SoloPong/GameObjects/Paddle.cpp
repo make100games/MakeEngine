@@ -40,7 +40,7 @@ void Paddle::initialize() {
     auto yPos = (myCanvasBounds.bottom / 2) - (height / 2);
     myTransform = myTransform.copyWithX(xPos);
     myTransform = myTransform.copyWithY(yPos);
-    myCollider = Collider { myTransform.x, myTransform.y, width, height, tag };
+    myCollider = Collider { myTransform.x, myTransform.y, width, height, tag, this };
     myRigidBody = RigidBody { xVelocity, yVelocity };
 }
 

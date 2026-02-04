@@ -142,6 +142,15 @@ void Ball::onCollision(Collider other) {
     } else {
         if (other.tag == "Paddle") {
             performAngleBasedBounce(other);
+            /*if(myCollider.y < other.y) {
+                // Hitting top of paddle
+                bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, 1 });
+                myTransform.y = other.y - size;
+            } else if(myCollider.y > other.y) {
+                // Hitting bottom of paddle
+                bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, -1 });
+                myTransform.y = other.y + other.height;
+            }*/
         }
     }
 }
@@ -166,12 +175,14 @@ void Ball::performAngleBasedBounce(Collider other) {
     xVelocity = speed * std::sin(normalized * maxBounceAngle);
     if(myCollider.y < other.y) {
         // Hitting top of paddle
-        yVelocity = -speed * std::cos(normalized * maxBounceAngle);
+        bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, 1 });
+        //yVelocity = -speed * std::cos(normalized * maxBounceAngle);
         myTransform.y = other.y - size;
         std::cout << "Hit top of paddle \n";
     } else if(myCollider.y > other.y) {
         // Hitting bottom of paddle
-        yVelocity = speed * std::cos(normalized * maxBounceAngle);
+        bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, -1 });
+        //yVelocity = speed * std::cos(normalized * maxBounceAngle);
         myTransform.y = other.y + other.height;
         std::cout << "Hit bottom of paddle \n";
     }
@@ -195,6 +206,8 @@ void Ball::bounceOffBallDependingOnPaddleSpeed(Collider other, Vec2 paddleNormal
     
     // Apply velocity
     ballVelocity = reflected;
+    xVelocity = ballVelocity.x;
+    yVelocity = ballVelocity.y;
 }
 
 void Ball::onKeyInput(KeyInput input) {
