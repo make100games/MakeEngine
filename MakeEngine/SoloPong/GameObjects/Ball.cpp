@@ -10,9 +10,9 @@
 #include <iostream>
 
 static const std::string tag = "Ball";
-static const float ballMinSpeed = 300.0f;
+static const float ballMinSpeed = 150.0f;
 static const float ballMaxSpeed = 1000.0f;
-static const float ballVelocity = 300.0f;
+static const float ballVelocity = 150.0f;
 
 // Amount by which to gradually increase speed of ball
 static const float increaseInSpeed = 5.0f;
@@ -144,15 +144,6 @@ void Ball::onCollision(Collider other) {
     } else {
         if (other.tag == "Paddle") {
             performAngleBasedBounce(other);
-            /*if(myCollider.y < other.y) {
-                // Hitting top of paddle
-                bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, 1 });
-                myTransform.y = other.y - size;
-            } else if(myCollider.y > other.y) {
-                // Hitting bottom of paddle
-                bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, -1 });
-                myTransform.y = other.y + other.height;
-            }*/
         }
     }
 }
@@ -178,15 +169,11 @@ void Ball::performAngleBasedBounce(Collider other) {
     if(myCollider.y < other.y) {
         // Hitting top of paddle
         bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, 1 });
-        //yVelocity = -speed * std::cos(normalized * maxBounceAngle);
         myTransform.y = other.y - size;
-        std::cout << "Hit top of paddle \n";
     } else if(myCollider.y > other.y) {
         // Hitting bottom of paddle
         bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, -1 });
-        //yVelocity = speed * std::cos(normalized * maxBounceAngle);
         myTransform.y = other.y + other.height;
-        std::cout << "Hit bottom of paddle \n";
     }
 }
 
@@ -216,5 +203,5 @@ void Ball::bounceOffBallDependingOnPaddleSpeed(Collider other, Vec2 paddleNormal
 }
 
 void Ball::onKeyInput(KeyInput input) {
-    
+    // No-op
 }
