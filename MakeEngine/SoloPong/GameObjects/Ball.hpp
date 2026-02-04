@@ -48,6 +48,8 @@ private:
     float size = 20.0f;
     
     void performAngleBasedBounce(Collider other);
+    
+    void increaseSpeedOverTime(float deltaTime);
 };
 
 #endif /* Ball_hpp */

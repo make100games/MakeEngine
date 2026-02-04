@@ -12,6 +12,9 @@
 static const std::string tag = "Ball";
 static const float ballVelocity = 300.0f;
 
+// Amount by which to gradually increase speed of ball
+static const float increaseInSpeed = 5.0f;
+
 Ball::Ball():myTransform(Transform {0.0f, 0.0f, tag}) {
     // Note: Place top left vertex at 0,0. Otherwise you bake in an offset
     float left = 0.0f;
@@ -66,6 +69,20 @@ void Ball::update(float deltaTime) {
     myTransform.x += xVelocity * deltaTime;
     myTransform.y += yVelocity * deltaTime;
     myCollider = myCollider.copyWithX(myTransform.x).copyWithY(myTransform.y);
+    
+    increaseSpeedOverTime(deltaTime);
+}
+
+void Ball::increaseSpeedOverTime(float deltaTime) {
+    auto magnitude = sqrt((xVelocity * xVelocity) + (yVelocity * yVelocity));
+    auto xNormalized = xVelocity / magnitude;
+    auto yNormalized = yVelocity / magnitude;
+    
+    // Increase speed
+    magnitude += increaseInSpeed * deltaTime;
+    
+    xVelocity = xNormalized * magnitude;
+    yVelocity = yNormalized * magnitude;
 }
 
 const std::unique_ptr<Renderable>& Ball::renderable() const {
