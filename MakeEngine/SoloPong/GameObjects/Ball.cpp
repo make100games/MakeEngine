@@ -135,16 +135,6 @@ void Ball::onCollision(Collider other) {
     } else {
         if (other.tag == "Paddle") {
             performAngleBasedBounce(other);
-        } else {
-            // Vertical collision → invert Y velocity
-            yVelocity *= -1;
-            if (deltaY > 0) {
-                // Collided with bottom edge
-                myTransform.y = other.y + other.height;
-            } else if(deltaY < 0) {
-                // Colided with top edge
-                myTransform.y = other.y;
-            }
         }
     }
 }
