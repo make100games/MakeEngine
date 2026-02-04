@@ -16,6 +16,7 @@
 #include "Bounds.hpp"
 #include "Collider.hpp"
 #include "KeyInput.hpp"
+#include "RigidBody.hpp"
 
 class Paddle : public GameObject {
 public:
@@ -30,6 +31,8 @@ public:
     
     Transform transform() override;
     
+    RigidBody rigidBody() override;
+    
     void onCanvasBoundsChanged(Bounds bounds) override;
     
     Collider collider() override;
@@ -43,6 +46,7 @@ private:
     Transform myTransform;
     Bounds myCanvasBounds;
     Collider myCollider;
+    RigidBody myRigidBody;
     float xVelocity = 0.0f;
     float yVelocity = 0.0f;
     float width = 150.0f;

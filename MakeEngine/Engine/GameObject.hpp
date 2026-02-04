@@ -15,6 +15,7 @@
 #include "Bounds.hpp"
 #include "Collider.hpp"
 #include "KeyInput.hpp"
+#include "RigidBody.hpp"
 
 // TODO: define a Renderable interface that contains the vertices, color and a renderTag. The renderTag
 // will determine what VBO/VAO OpenGL will use to draw it
@@ -42,6 +43,11 @@ public:
      The transform of the GameObject.
      */
     virtual Transform transform() = 0;
+    
+    /**
+     The RigidBody of the GameObject.
+     */
+    virtual RigidBody rigidBody() = 0;
     
     /**
      Called when the bounds of the canvas have changed. The canvas is the area in the screen in which the entire sceen is drawn.

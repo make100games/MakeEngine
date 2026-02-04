@@ -45,6 +45,7 @@ void Ball::initialize() {
     myTransform = myTransform.copyWithY(y);
     myCollider = Collider { myTransform.x, myTransform.y, size, size, tag };
     yVelocity = ballVelocity;
+    myRigidBody = RigidBody { xVelocity, yVelocity };
 }
 
 void Ball::update(float deltaTime) {
@@ -71,6 +72,8 @@ void Ball::update(float deltaTime) {
     myCollider = myCollider.copyWithX(myTransform.x).copyWithY(myTransform.y);
     
     increaseSpeedOverTime(deltaTime);
+    
+    myRigidBody = RigidBody { xVelocity, yVelocity };
 }
 
 void Ball::increaseSpeedOverTime(float deltaTime) {
@@ -91,6 +94,10 @@ const std::unique_ptr<Renderable>& Ball::renderable() const {
 
 Transform Ball::transform() {
     return myTransform;
+}
+
+RigidBody Ball::rigidBody() {
+    return myRigidBody;
 }
 
 void Ball::onCanvasBoundsChanged(Bounds bounds) {

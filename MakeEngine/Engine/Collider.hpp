@@ -11,12 +11,15 @@
 #include <stdio.h>
 #include <string>
 
+class GameObject;
+
 struct Collider {
     float x;
     float y;
     float width;
     float height;
     std::string tag;
+    GameObject* gameObject = nullptr;
     
     Collider copyWithX(float newX) const {
         Collider newCollider = *this;

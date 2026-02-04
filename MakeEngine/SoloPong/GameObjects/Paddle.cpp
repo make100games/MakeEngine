@@ -41,6 +41,7 @@ void Paddle::initialize() {
     myTransform = myTransform.copyWithX(xPos);
     myTransform = myTransform.copyWithY(yPos);
     myCollider = Collider { myTransform.x, myTransform.y, width, height, tag };
+    myRigidBody = RigidBody { xVelocity, yVelocity };
 }
 
 void Paddle::update(float deltaTime) {
@@ -67,6 +68,7 @@ void Paddle::update(float deltaTime) {
     }
     
     myCollider = myCollider.copyWithX(myTransform.x).copyWithY(myTransform.y);
+    myRigidBody = RigidBody { xVelocity, yVelocity };
 }
 
 const std::unique_ptr<Renderable>& Paddle::renderable() const {
@@ -75,6 +77,10 @@ const std::unique_ptr<Renderable>& Paddle::renderable() const {
 
 Transform Paddle::transform() {
     return myTransform;
+}
+
+RigidBody Paddle::rigidBody() {
+    return myRigidBody;
 }
 
 void Paddle::onCanvasBoundsChanged(Bounds bounds) {

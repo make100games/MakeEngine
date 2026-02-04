@@ -35,6 +35,7 @@
 /* Begin PBXFileReference section */
 		8D0545BA2F3157C300AEDDFC /* Logging.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logging.cpp; sourceTree = "<group>"; };
 		8D0545BB2F3157C300AEDDFC /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
+		8D0E88112F33EC1E003797A4 /* RigidBody.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RigidBody.hpp; sourceTree = "<group>"; };
 		8D17A5C22F2FEE8B003B7DC1 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		8D17A5C52F2FEE9E003B7DC1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8D17A5C72F2FEF05003B7DC1 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -108,6 +109,7 @@
 				8D17A5D92F2FEF93003B7DC1 /* Scene.hpp */,
 				8D0545BA2F3157C300AEDDFC /* Logging.cpp */,
 				8D0545BB2F3157C300AEDDFC /* Logging.hpp */,
+				8D0E88112F33EC1E003797A4 /* RigidBody.hpp */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
