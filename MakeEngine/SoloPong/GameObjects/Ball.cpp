@@ -10,6 +10,8 @@
 #include <iostream>
 
 static const std::string tag = "Ball";
+static const float ballMinSpeed = 300.0f;
+static const float ballMaxSpeed = 1000.0f;
 static const float ballVelocity = 300.0f;
 
 // Amount by which to gradually increase speed of ball
@@ -202,7 +204,10 @@ void Ball::bounceOffBallDependingOnPaddleSpeed(Collider other, Vec2 paddleNormal
     // Add influence of paddle speed to reflected ball speed
     reflected += paddleNormal * paddleSpeedAlongNormal;
     
-    // TODO clamp speed
+    // Clamp speed
+    float speed = length(reflected);
+    speed = clamp(speed, ballMinSpeed, ballMaxSpeed);
+    reflected = normalize(reflected) * speed;
     
     // Apply velocity
     ballVelocity = reflected;
