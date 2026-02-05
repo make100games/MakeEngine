@@ -1,14 +1,15 @@
 //
-//  Ball.hpp
+//  Kudos.hpp
 //  MakeEngine
 //
-//  Created by Make100Games on 02.02.26.
+//  Created by Make100Games on 05.02.26.
 //
 
-#ifndef Ball_hpp
-#define Ball_hpp
+#ifndef Kudos_hpp
+#define Kudos_hpp
 
 #include <stdio.h>
+#include "GameObject.hpp"
 #include "GameObject.hpp"
 #include "Renderable.hpp"
 #include <memory>
@@ -18,13 +19,15 @@
 #include "KeyInput.hpp"
 #include "RigidBody.hpp"
 #include "Vec2.hpp"
-#include "math_utils.hpp"
-#include "KudosManager.hpp"
 
-class Ball : public GameObject {
+/**
+ You receive Kudos each time you successfully knock the ball back to the other side. Each time the ball hits the top or bottom of the window, you lose kudos.
+ You lose the game when you run out of kudos.
+ */
+class Kudos : public GameObject {
 public:
-    Ball(KudosManager* kudosManager);
-    ~Ball();
+    Kudos(float positionX, float positionY);
+    ~Kudos();
     
     void initialize() override;
     
@@ -45,21 +48,13 @@ public:
     void onKeyInput(KeyInput input) override;
     
 private:
-    KudosManager* myKudosManager;
+    float positionX;
+    float positionY;
     std::unique_ptr<Renderable> myRenderable;
     Transform myTransform;
-    Bounds myCanvasBounds;
-    Collider myCollider;
     RigidBody myRigidBody;
-    float xVelocity = 0.0f;
-    float yVelocity = 0.0f;
-    float size = 20.0f;
-    
-    void performAngleBasedBounce(Collider other);
-    
-    void increaseSpeedOverTime(float deltaTime);
-    
-    void bounceOffBallDependingOnPaddleSpeed(Collider other, Vec2 paddleNormal);
+    Bounds myBounds;
+    Collider myCollider;
 };
 
-#endif /* Ball_hpp */
+#endif /* Kudos_hpp */

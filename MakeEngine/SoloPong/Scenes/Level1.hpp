@@ -13,8 +13,11 @@
 #include <vector>
 #include <memory>
 #include "Bounds.hpp"
+#include "KudosManagerListener.hpp"
+#include "Kudos.hpp"
+#include "KudosManager.hpp"
 
-class Level1 : public Scene {
+class Level1 : public Scene, KudosManagerListener {
 public:
     Level1();
     ~Level1();
@@ -29,7 +32,13 @@ public:
     
     void addSceneListener(SceneListener* listener) override;
     
+    // Methods from KudosManagerListener
+    void onKudosEarned() override;
+    
+    void onKudosLost() override;
+    
 private:
+    std::unique_ptr<KudosManager> myKudosManager;
     SceneListener* sceneListener;
     Bounds myCanvasBounds;
     std::vector<std::unique_ptr<GameObject>> myGameObjects;

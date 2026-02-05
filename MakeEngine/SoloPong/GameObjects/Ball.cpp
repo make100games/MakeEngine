@@ -17,7 +17,8 @@ static const float ballVelocity = 180.0f;
 // Amount by which to gradually increase speed of ball
 static const float increaseInSpeed = 5.0f;
 
-Ball::Ball():myTransform(Transform {0.0f, 0.0f, tag}) {
+Ball::Ball(KudosManager* kudosManager):myTransform(Transform {0.0f, 0.0f, tag}) {
+    myKudosManager = kudosManager;
     // Note: Place top left vertex at 0,0. Otherwise you bake in an offset
     float left = 0.0f;
     float top = 0.0f;
@@ -55,9 +56,11 @@ void Ball::update(float deltaTime) {
     if(myTransform.y < myCanvasBounds.top) {
         myTransform = myTransform.copyWithY(myCanvasBounds.top);
         yVelocity *= -1;
+        myKudosManager -> loseKudos();
     } else if((myTransform.y + size) > myCanvasBounds.bottom) {
         myTransform = myTransform.copyWithY(myCanvasBounds.bottom - size);
         yVelocity *= -1;
+        myKudosManager -> loseKudos();
     }
     
     // Check collision with left or right edge of screen
@@ -151,6 +154,7 @@ void Ball::onCollision(Collider other) {
 void Ball::performAngleBasedBounce(Collider other) {
     // The following is also courtesy of Chat GPT. Gettin' a little too comfortable having it do all of the algorithmic heavy lifting for me. But I do understand what is happening here :)
     // This should only be called if we collide with the paddle so we can assume that the other collider is the collider of the paddle
+    float oldYVelocity = yVelocity;
     float ballCenterX = myCollider.x + (myCollider.width / 2);
     float paddleCenterX = other.x + (other.width / 2);
     float paddleHalfWidth = other.width / 2.0f;
@@ -174,6 +178,13 @@ void Ball::performAngleBasedBounce(Collider other) {
         // Hitting bottom of paddle
         bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, -1 });
         myTransform.y = other.y + other.height;
+    }
+    
+    // Check if ball has changed direction in the y axis
+    bool yVelocityChangedSign = (oldYVelocity < 0) != (yVelocity < 0);
+    if(yVelocityChangedSign) {
+        // Ball has changed direction
+        myKudosManager -> earnKudos();
     }
 }
 
