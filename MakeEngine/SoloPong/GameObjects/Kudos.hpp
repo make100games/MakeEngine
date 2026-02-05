@@ -26,7 +26,7 @@
  */
 class Kudos : public GameObject {
 public:
-    Kudos(float positionX, float positionY);
+    Kudos(float positionX, float positionY, int key);
     ~Kudos();
     
     void initialize() override;
@@ -47,9 +47,12 @@ public:
     
     void onKeyInput(KeyInput input) override;
     
+    int getKey();
+    
 private:
     float positionX;
     float positionY;
+    int key;
     std::unique_ptr<Renderable> myRenderable;
     Transform myTransform;
     RigidBody myRigidBody;

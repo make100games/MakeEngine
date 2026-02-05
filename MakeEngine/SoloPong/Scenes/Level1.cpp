@@ -47,6 +47,7 @@ void Level1::addSceneListener(SceneListener *listener) {
 
 void Level1::onKudosEarned() {
     std::cout << "Kudos earned!\n";
+    
     //myGameObjects.push_back(std::move(kudos));
     //this -> sceneListener -> onGameObjectsInSceneHaveChanged();
 }

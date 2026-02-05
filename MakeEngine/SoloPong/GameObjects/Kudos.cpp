@@ -11,9 +11,10 @@
 static const std::string tag = "Kudos";
 static const float size = 10.0f;
 
-Kudos::Kudos(float positionX, float positionY): myTransform({0.0f, 0.0f, tag}) {
+Kudos::Kudos(float positionX, float positionY, int key): myTransform({0.0f, 0.0f, tag}) {
     this->positionX = positionX;
     this->positionY = positionY;
+    this->key = key;
     auto color = Vec3 { 0.0f, 1.0f, 0.0f };
     auto top = 0.0f;
     auto left = 0.0f;
@@ -68,4 +69,8 @@ void Kudos::onCollision(Collider other) {
 
 void Kudos::onKeyInput(KeyInput input) {
     
+}
+
+int Kudos::getKey() {
+    return key;
 }
