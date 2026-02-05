@@ -10,9 +10,9 @@
 #include <iostream>
 
 static const std::string tag = "Ball";
-static const float ballMinSpeed = 150.0f;
-static const float ballMaxSpeed = 1000.0f;
-static const float ballVelocity = 150.0f;
+static const float ballMinSpeed = 180.0f;
+static const float ballMaxSpeed = 700.0f;
+static const float ballVelocity = 180.0f;
 
 // Amount by which to gradually increase speed of ball
 static const float increaseInSpeed = 5.0f;
