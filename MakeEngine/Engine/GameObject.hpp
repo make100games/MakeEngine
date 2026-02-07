@@ -25,7 +25,9 @@ public:
     virtual ~GameObject() = default;
     
     /**
-    Called once after a game object is initialzed.
+    Called once by the GameEngine if GameObject is added to the Scene during the Scene's onStart method. This method is not called
+     by the engine automatically if the GameObject is added to the scene at a later time. Then the entity that adds the GameObject must call this method.
+     Use this method to do simple initialization work such as creating Transforms, Colliders and RigidBodies.
      */
     virtual void initialize() = 0;
     

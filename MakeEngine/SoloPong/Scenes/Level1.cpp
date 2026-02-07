@@ -79,8 +79,11 @@ void Level1::onKudosEarned() {
     float endOfLastKudos = lastKudos -> transform().x + Kudos::Size;
     float newKudosX = endOfLastKudos + spaceBetweenKudos;
     std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(newKudosX, kudosTop, currentKudosColor);
+    kudos -> initialize();
     myGameObjects.push_back(std::move(kudos));
     this -> sceneListener -> onGameObjectsInSceneHaveChanged();
+    
+    std::cout << "Added new kudos at position x: " << newKudosX << ", y: " << kudosTop << "\n";
 }
 
 void Level1::onKudosLost() {
