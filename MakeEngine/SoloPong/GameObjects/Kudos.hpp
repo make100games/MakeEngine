@@ -29,6 +29,10 @@ public:
     Kudos(float positionX, float positionY, Vec3 color);
     ~Kudos();
     
+    float getPositionX();
+    
+    float getPositionY();
+    
     void initialize() override;
     
     void update(float deltaTime) override;

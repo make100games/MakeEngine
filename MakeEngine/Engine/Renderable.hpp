@@ -31,6 +31,11 @@ public:
     /**
      A tag that indicates in what context this renderable should be rendered. Renderables with the same tag will be rendered together, translated
      together etc. As a rule of thumb: each renderable that can move independently of others should have its own renderTag.
+     
+     Renderables with the same tag which are applied to different GameObject instances will share the same Transform. What this means is, say you have a Brick GameObject with a Renderable of tag "Brick". Say you create multiple instances of these Brick GameObjects. Each instance has the same tag "Brick". If
+     you change the transform of one of these instances, it will be applied to all instances during rendering. If you therefore want to place multiple Bricks at
+     different locations, do so not by providing a value to the transform but by baking the position straight into the vertices of the Renderable. The transform can
+     be used to translate all of the Bricks at once (e.g. to create a moving wall, for example).
      */
     virtual std::string renderTag() = 0;
     

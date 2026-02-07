@@ -60,6 +60,7 @@ void Level1::onStartedNewLevel(Vec3 color, int maxKudosInLevel) {
     kudosTop = hudTop + (Constants::HudHeight / 2) - (Kudos::Size / 2);
     spaceBetweenKudos = calculateSpaceBetween(maxKudosInLevel);
     std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, kudosTop, currentKudosColor);
+    myKudos.push_back(kudos.get());
     myGameObjects.push_back(std::move(kudos));
 }
 
@@ -75,11 +76,12 @@ void Level1::onKudosEarned() {
     std::cout << "Kudos earned!\n";
     
     // We can assume the Kudos are always the last objects in the scene. A bit fragile but fine for now.
-    auto& lastKudos = myGameObjects[myGameObjects.size() - 1];
-    float endOfLastKudos = lastKudos -> transform().x + Kudos::Size;
+    auto& lastKudos = myKudos[myKudos.size() - 1];
+    float endOfLastKudos = lastKudos -> getPositionX() + Kudos::Size;
     float newKudosX = endOfLastKudos + spaceBetweenKudos;
     std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(newKudosX, kudosTop, currentKudosColor);
     kudos -> initialize();
+    myKudos.push_back(kudos.get());
     myGameObjects.push_back(std::move(kudos));
     this -> sceneListener -> onGameObjectsInSceneHaveChanged();
     
@@ -88,4 +90,9 @@ void Level1::onKudosEarned() {
 
 void Level1::onKudosLost() {
     std::cout << "Kudos lost!\n";
+    // make sure to remove the raw pointer (observer) first!
+    //myKudos.pop_back();
+    
+    // remove owner second!
+    //myGameObjects.pop_back();
 }

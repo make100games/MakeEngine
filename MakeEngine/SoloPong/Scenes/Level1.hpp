@@ -44,7 +44,12 @@ private:
     std::unique_ptr<KudosManager> myKudosManager;
     SceneListener* sceneListener;
     Bounds myCanvasBounds;
+    
+    // This setup is a bit ugly and fragile. We have a list of GameObjects. This is the list that owns the GameObjects
+    // But we also have a list of Kudos that are just raw pointers to Kudos objects. It is therefore important in
+    // which order we add and remove items from these lists and that they remain in sync. Gross but fine for this game... lol
     std::vector<std::unique_ptr<GameObject>> myGameObjects;
+    std::vector<Kudos*> myKudos;
     float hudTop;
     float kudosTop;
     float spaceBetweenKudos = 0;

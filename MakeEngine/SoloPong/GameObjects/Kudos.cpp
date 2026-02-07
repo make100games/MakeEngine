@@ -11,10 +11,10 @@
 static const std::string tag = "Kudos";
 
 Kudos::Kudos(float positionX, float positionY, Vec3 color): myTransform({0.0f, 0.0f, tag}) {
-    this->positionX = positionX;
-    this->positionY = positionY;
-    auto top = 0.0f;
-    auto left = 0.0f;
+    this -> positionX = positionX;
+    this -> positionY = positionY;
+    auto top = positionY;
+    auto left = positionX;
     std::vector<float> vertices = std::vector<float> {
         // Triangle 1
         left, top,
@@ -32,8 +32,15 @@ Kudos::~Kudos() {
     
 }
 
+float Kudos::getPositionX() {
+    return positionX;
+}
+
+float Kudos::getPositionY() {
+    return positionY;
+}
+
 void Kudos::initialize() {
-    myTransform = myTransform.copyWithX(positionX).copyWithY(positionY);
     myCollider = Collider { myTransform.x, myTransform.y, Size, Size, tag };
 }
 
