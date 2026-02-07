@@ -19,6 +19,7 @@
 		8D7001442F2FF3C50075F49D /* Level1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D7001422F2FF3C50075F49D /* Level1.cpp */; };
 		8D7001472F2FF9F50075F49D /* Rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D7001452F2FF9F50075F49D /* Rectangle.cpp */; };
 		8D70014A2F30004D0075F49D /* Paddle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D7001482F30004D0075F49D /* Paddle.cpp */; };
+		8DAAEC562F37D3EC0025DFE7 /* Hud.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DAAEC542F37D3EC0025DFE7 /* Hud.cpp */; };
 		8DC3169B2F314A440063D7B8 /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DC316992F314A440063D7B8 /* Ball.cpp */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,9 @@
 		8D7001482F30004D0075F49D /* Paddle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Paddle.cpp; sourceTree = "<group>"; };
 		8D7001492F30004D0075F49D /* Paddle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Paddle.hpp; sourceTree = "<group>"; };
 		8D90DAAB2F2FEDD900BC93F7 /* MakeEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MakeEngine; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DAAEC522F37D38A0025DFE7 /* Constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Constants.hpp; sourceTree = "<group>"; };
+		8DAAEC542F37D3EC0025DFE7 /* Hud.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hud.cpp; sourceTree = "<group>"; };
+		8DAAEC552F37D3EC0025DFE7 /* Hud.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Hud.hpp; sourceTree = "<group>"; };
 		8DC316992F314A440063D7B8 /* Ball.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
 		8DC3169A2F314A440063D7B8 /* Ball.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +144,7 @@
 				8D7001412F2FF3B00075F49D /* Renderables */,
 				8D7001402F2FF3A90075F49D /* GameObjects */,
 				8D70013F2F2FF3A00075F49D /* Scenes */,
+				8DAAEC522F37D38A0025DFE7 /* Constants.hpp */,
 			);
 			path = SoloPong;
 			sourceTree = "<group>";
@@ -162,6 +167,8 @@
 				8DC3169A2F314A440063D7B8 /* Ball.hpp */,
 				8D5C0DC52F353EB3005A9CBA /* Kudos.cpp */,
 				8D5C0DC62F353EB3005A9CBA /* Kudos.hpp */,
+				8DAAEC542F37D3EC0025DFE7 /* Hud.cpp */,
+				8DAAEC552F37D3EC0025DFE7 /* Hud.hpp */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -268,6 +275,7 @@
 				8D7001442F2FF3C50075F49D /* Level1.cpp in Sources */,
 				8D7001472F2FF9F50075F49D /* Rectangle.cpp in Sources */,
 				8D0545BC2F3157C300AEDDFC /* Logging.cpp in Sources */,
+				8DAAEC562F37D3EC0025DFE7 /* Hud.cpp in Sources */,
 				8D5C0DCD2F35463F005A9CBA /* KudosManager.cpp in Sources */,
 				8D70014A2F30004D0075F49D /* Paddle.cpp in Sources */,
 			);

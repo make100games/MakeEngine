@@ -8,6 +8,7 @@
 #include "Ball.hpp"
 #include "Rectangle.hpp"
 #include <iostream>
+#include "Constants.hpp"
 
 static const std::string tag = "Ball";
 static const float ballMinSpeed = 180.0f;
@@ -53,12 +54,13 @@ void Ball::initialize() {
 
 void Ball::update(float deltaTime) {
     // Check collision with top or bottom of screen
+    float canvasBottom = myCanvasBounds.bottom - Constants::HudHeight;
     if(myTransform.y < myCanvasBounds.top) {
         myTransform = myTransform.copyWithY(myCanvasBounds.top);
         yVelocity *= -1;
         myKudosManager -> loseKudos();
-    } else if((myTransform.y + size) > myCanvasBounds.bottom) {
-        myTransform = myTransform.copyWithY(myCanvasBounds.bottom - size);
+    } else if((myTransform.y + size) > canvasBottom) {
+        myTransform = myTransform.copyWithY(canvasBottom - size);
         yVelocity *= -1;
         myKudosManager -> loseKudos();
     }

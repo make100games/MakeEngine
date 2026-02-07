@@ -9,6 +9,7 @@
 #include "Rectangle.hpp"
 #include <iostream>
 #include "Logging.hpp"
+#include "Constants.hpp"
 
 static const std::string tag = "Paddle";
 static const float paddleVelocity = 500.0f;
@@ -57,12 +58,13 @@ void Paddle::update(float deltaTime) {
     }
     
     // Vertical movement
+    float canvasBottom = myCanvasBounds.bottom - Constants::HudHeight;
     if(myTransform.y < myCanvasBounds.top) {
         yVelocity = 0.0f;
         myTransform = myTransform.copyWithY(myCanvasBounds.top);
-    } else if((myTransform.y + height) > myCanvasBounds.bottom) {
+    } else if((myTransform.y + height) > canvasBottom) {
         yVelocity = 0.0f;
-        myTransform = myTransform.copyWithY(myCanvasBounds.bottom - height);
+        myTransform = myTransform.copyWithY(canvasBottom - height);
     } else {
         myTransform.y += yVelocity * deltaTime;
     }

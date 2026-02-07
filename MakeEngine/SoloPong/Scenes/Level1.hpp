@@ -33,6 +33,8 @@ public:
     void addSceneListener(SceneListener* listener) override;
     
     // Methods from KudosManagerListener
+    void onStartedNewLevel(Vec3 color, int maxKudosInLevel) override;
+    
     void onKudosEarned() override;
     
     void onKudosLost() override;
@@ -42,6 +44,10 @@ private:
     SceneListener* sceneListener;
     Bounds myCanvasBounds;
     std::vector<std::unique_ptr<GameObject>> myGameObjects;
+    float hudTop;
+    float spaceBetweenKudos = 0;
+    
+    float calculateSpaceBetween(int numberOfItems);
 };
 
 #endif /* Level1_hpp */

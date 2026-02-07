@@ -1,12 +1,12 @@
 //
-//  Kudos.hpp
+//  Hud.hpp
 //  MakeEngine
 //
-//  Created by Make100Games on 05.02.26.
+//  Created by Make100Games on 07.02.26.
 //
 
-#ifndef Kudos_hpp
-#define Kudos_hpp
+#ifndef Hud_hpp
+#define Hud_hpp
 
 #include <stdio.h>
 #include "GameObject.hpp"
@@ -19,15 +19,12 @@
 #include "RigidBody.hpp"
 #include "Vec2.hpp"
 #include "Vec3.hpp"
+#include <vector>
 
-/**
- You receive Kudos each time you successfully knock the ball back to the other side. Each time the ball hits the top or bottom of the window, you lose kudos.
- You lose the game when you run out of kudos.
- */
-class Kudos : public GameObject {
+class Hud : public GameObject {
 public:
-    Kudos(float positionX, float positionY, Vec3 color);
-    ~Kudos();
+    Hud();
+    ~Hud();
     
     void initialize() override;
     
@@ -47,11 +44,7 @@ public:
     
     void onKeyInput(KeyInput input) override;
     
-    constexpr static float Size = 10.0f;
-    
 private:
-    float positionX;
-    float positionY;
     std::unique_ptr<Renderable> myRenderable;
     Transform myTransform;
     RigidBody myRigidBody;
@@ -59,4 +52,4 @@ private:
     Collider myCollider;
 };
 
-#endif /* Kudos_hpp */
+#endif /* Hud_hpp */

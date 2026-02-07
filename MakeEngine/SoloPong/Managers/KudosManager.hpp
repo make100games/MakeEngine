@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include "KudosManagerListener.hpp"
+#include <vector>
+#include "Vec3.hpp"
 
 class KudosManager {
 public:
@@ -23,7 +25,12 @@ public:
     void loseKudos();
     
 private:
+    static const int MaxKudosPerLevel = 10;
     KudosManagerListener* myListener;
+    int numberOfKudos = 0;
+    int currentLevel = 0;
+    std::vector<Vec3> levelColors;
+    Vec3 currentKudosColor;
 };
 
 #endif /* KudosManager_hpp */
