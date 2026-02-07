@@ -86,6 +86,10 @@ float Engine::measureTimeSinceLastUpdate() {
 
 // FIXME: Optimize this to use broad phase and narrow phase collision detection. Right now we just have a nasty O(n squared) nested for-loop situation here
 void Engine::checkForCollisions(std::vector<std::unique_ptr<GameObject>>& gameObjects) {
+    // Do a to-pass collision detection and notification approach.
+    // Pass 1: Collect objects that are colliding along with objects they are colliding with
+    // Pass 2: Notify all colliding objects of their collision
+    std::vector<std::pair<GameObject*, GameObject*>> collidingGos = std::vector<std::pair<GameObject*, GameObject*>>();
     for (auto& go : gameObjects) {
         bool alreadyCollided = false;
         for (auto& otherGo : gameObjects) {
@@ -93,11 +97,15 @@ void Engine::checkForCollisions(std::vector<std::unique_ptr<GameObject>>& gameOb
             if (go != otherGo) {
                 bool collisionOccurred = isColliding(go -> collider(), otherGo -> collider());
                 if(collisionOccurred && !alreadyCollided) {
-                    go -> onCollision(otherGo -> collider());
+                    collidingGos.push_back(std::make_pair(go.get(), otherGo.get()));
                     alreadyCollided = true;
                 }
             }
         }
+    }
+    
+    for (auto go : collidingGos) {
+        go.first -> onCollision(go.second -> collider());
     }
 }
 

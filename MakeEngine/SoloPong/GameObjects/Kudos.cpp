@@ -34,6 +34,7 @@ Kudos::~Kudos() {
 
 void Kudos::initialize() {
     myTransform = myTransform.copyWithX(positionX).copyWithY(positionY);
+    myCollider = Collider { myTransform.x, myTransform.y, Size, Size, tag };
 }
 
 void Kudos::update(float deltaTime) {

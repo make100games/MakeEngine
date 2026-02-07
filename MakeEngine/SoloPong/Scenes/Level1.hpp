@@ -16,6 +16,7 @@
 #include "KudosManagerListener.hpp"
 #include "Kudos.hpp"
 #include "KudosManager.hpp"
+#include "Vec3.hpp"
 
 class Level1 : public Scene, KudosManagerListener {
 public:
@@ -45,7 +46,9 @@ private:
     Bounds myCanvasBounds;
     std::vector<std::unique_ptr<GameObject>> myGameObjects;
     float hudTop;
+    float kudosTop;
     float spaceBetweenKudos = 0;
+    Vec3 currentKudosColor;
     
     float calculateSpaceBetween(int numberOfItems);
 };

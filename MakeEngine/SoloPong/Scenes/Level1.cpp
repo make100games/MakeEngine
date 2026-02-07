@@ -56,9 +56,10 @@ void Level1::addSceneListener(SceneListener *listener) {
 
 void Level1::onStartedNewLevel(Vec3 color, int maxKudosInLevel) {
     std::cout << "Started new level";
-    float kudosTop = hudTop + (Constants::HudHeight / 2) - (Kudos::Size / 2);
+    currentKudosColor = color;
+    kudosTop = hudTop + (Constants::HudHeight / 2) - (Kudos::Size / 2);
     spaceBetweenKudos = calculateSpaceBetween(maxKudosInLevel);
-    std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, kudosTop, color);
+    std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, kudosTop, currentKudosColor);
     myGameObjects.push_back(std::move(kudos));
 }
 
@@ -73,8 +74,13 @@ float Level1::calculateSpaceBetween(int numberOfItems) {
 void Level1::onKudosEarned() {
     std::cout << "Kudos earned!\n";
     
-    //myGameObjects.push_back(std::move(kudos));
-    //this -> sceneListener -> onGameObjectsInSceneHaveChanged();
+    // We can assume the Kudos are always the last objects in the scene. A bit fragile but fine for now.
+    auto& lastKudos = myGameObjects[myGameObjects.size() - 1];
+    float endOfLastKudos = lastKudos -> transform().x + Kudos::Size;
+    float newKudosX = endOfLastKudos + spaceBetweenKudos;
+    std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(newKudosX, kudosTop, currentKudosColor);
+    myGameObjects.push_back(std::move(kudos));
+    this -> sceneListener -> onGameObjectsInSceneHaveChanged();
 }
 
 void Level1::onKudosLost() {
