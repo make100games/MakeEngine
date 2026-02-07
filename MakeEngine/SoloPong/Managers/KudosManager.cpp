@@ -30,6 +30,14 @@ void KudosManager::setListener(KudosManagerListener *listener) {
     myListener = listener;
 }
 
+void KudosManager::startGame() {
+    currentLevel = 0;
+    currentKudosColor = levelColors[currentLevel];
+    if(myListener != nullptr) {
+        myListener -> onStartedNewLevel(currentKudosColor, 10);
+    }
+}
+
 void KudosManager::earnKudos() {
     numberOfKudos++;
     if(numberOfKudos >= MaxKudosPerLevel) {

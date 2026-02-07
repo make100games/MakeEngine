@@ -33,7 +33,7 @@ Kudos::~Kudos() {
 }
 
 void Kudos::initialize() {
-    myTransform.copyWithX(positionX).copyWithY(positionY);
+    myTransform = myTransform.copyWithX(positionX).copyWithY(positionY);
 }
 
 void Kudos::update(float deltaTime) {

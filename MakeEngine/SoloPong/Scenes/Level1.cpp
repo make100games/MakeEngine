@@ -36,6 +36,10 @@ void Level1::onStart() {
     // Add paddle and ball
     myGameObjects.push_back(std::make_unique<Paddle>());
     myGameObjects.push_back(std::make_unique<Ball>(myKudosManager.get()));
+    
+    // By starting the game, the first level is loaded which causes the first Kudos to be added.
+    // Make sure we add the Kudos last so that we can also reasily remove them by just removing the last item
+    myKudosManager -> startGame();
 }
 
 void Level1::update() {
@@ -52,8 +56,9 @@ void Level1::addSceneListener(SceneListener *listener) {
 
 void Level1::onStartedNewLevel(Vec3 color, int maxKudosInLevel) {
     std::cout << "Started new level";
+    float kudosTop = hudTop + (Constants::HudHeight / 2) - (Kudos::Size / 2);
     spaceBetweenKudos = calculateSpaceBetween(maxKudosInLevel);
-    std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, hudTop, color);
+    std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, kudosTop, color);
     myGameObjects.push_back(std::move(kudos));
 }
 

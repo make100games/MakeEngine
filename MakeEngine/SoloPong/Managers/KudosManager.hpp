@@ -20,6 +20,9 @@ public:
     
     void setListener(KudosManagerListener* listener);
     
+    // Must be called after setting a KudosManagerListener!
+    void startGame();
+    
     void earnKudos();
     
     void loseKudos();
