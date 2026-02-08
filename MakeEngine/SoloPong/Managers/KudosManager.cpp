@@ -62,6 +62,7 @@ void KudosManager::earnKudos() {
 
 void KudosManager::loseKudos() {
     numberOfKudos--;
+    std::cout << "Lost Kudos. Current number: " << numberOfKudos << "\n";
     if(numberOfKudos <= 0) {
         // Player lost!
         // TODO notify GameManager!

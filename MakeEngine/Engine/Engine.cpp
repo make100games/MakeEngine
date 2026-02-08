@@ -14,6 +14,7 @@
 #include <unordered_map>
 
 Engine::Engine() : myCanvasBounds(Bounds { 0, 1000, 0, 700 }) {
+    objectsInSceneHaveChanged = false;
     lastTime = std::chrono::high_resolution_clock::now();
     renderer = std::make_unique<OpenGlRenderer>();
     scenes = std::vector<std::unique_ptr<Scene>>();
@@ -73,6 +74,10 @@ void Engine::update() {
         // There is probably a much more efficient way to do all this but I wanted to make sure that I had as few draw calls as possible in the renderer and to do that I batched Renderables that share the same tag into one draw call. Bridging this with the GameObject API (and avoiding having to expose too many of the implementation details of the Renderer to the GameObjects) I have to bring all this together here.
         renderer -> renderFrame(renderObjects);
         checkForCollisions(gameObjects);
+    }
+    if(objectsInSceneHaveChanged) {
+        reDrawObjectsInScene();
+        objectsInSceneHaveChanged = false;
     }
 }
 
@@ -144,6 +149,10 @@ void Engine::delegateKeyInputToGameObjects(const KeyInput& input) {
 }
 
 void Engine::onGameObjectsInSceneHaveChanged() {
+    objectsInSceneHaveChanged = true;
+}
+
+void Engine::reDrawObjectsInScene() {
     // Here we basically fetch the GameObjects again (since they probably changed, otherwise why would the caller have called this method), and add them anew to the Renderer. This replaces what's already in the Renderer's scene
     // Note: This is a bit of copy/pasta from a snippet above. I could probably find a way to share this somehow but my hope is this won't change frequently. Famous last words, I know...
     std::unordered_map<std::string, std::vector<Renderable*>> renderBuckets;

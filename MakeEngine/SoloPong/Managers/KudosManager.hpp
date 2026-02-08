@@ -12,6 +12,7 @@
 #include "KudosManagerListener.hpp"
 #include <vector>
 #include "Vec3.hpp"
+#include <iostream>
 
 class KudosManager {
 public:

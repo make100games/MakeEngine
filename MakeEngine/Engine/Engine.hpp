@@ -47,6 +47,7 @@ public:
     void onGameObjectsInSceneHaveChanged() override;
     
 private:
+    bool objectsInSceneHaveChanged;
     std::chrono::high_resolution_clock::time_point lastTime;
     std::unique_ptr<Scene> currentScene;
     std::unique_ptr<Renderer> renderer;
@@ -61,6 +62,12 @@ private:
     bool isColliding(const Collider& a, const Collider& b);
     void delegateKeyInputToGameObjects(const KeyInput& input);
     float measureTimeSinceLastUpdate();
+    
+    /**
+     Adds the GameObjects in the scene to the Renderer anew. This only happens if the current Scene told the Engine that the GameObjects in the scene
+     have changed.
+     */
+    void reDrawObjectsInScene();
 };
 
 

@@ -50,9 +50,9 @@ void Level1::onStartedNewLevel(Vec3 color, int maxKudosInLevel) {
     currentKudosColor = color;
     kudosTop = hudTop + (Constants::HudHeight / 2) - (Kudos::Size / 2);
     spaceBetweenKudos = calculateSpaceBetween(maxKudosInLevel);
-    std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, kudosTop, currentKudosColor);
+    /*std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, kudosTop, currentKudosColor);
     myKudos.push_back(kudos.get());
-    requestAdd(std::move(kudos));
+    requestAdd(std::move(kudos));*/
 }
 
 float Level1::calculateSpaceBetween(int numberOfItems) {
@@ -67,16 +67,20 @@ void Level1::onKudosEarned() {
     std::cout << "Kudos earned!\n";
     
     // We can assume the Kudos are always the last objects in the scene. A bit fragile but fine for now.
-    auto& lastKudos = myKudos[myKudos.size() - 1];
-    float endOfLastKudos = lastKudos -> getPositionX() + Kudos::Size;
-    float newKudosX = endOfLastKudos + spaceBetweenKudos;
-    std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(newKudosX, kudosTop, currentKudosColor);
-    kudos -> initialize();
-    myKudos.push_back(kudos.get());
-    requestAdd(std::move(kudos));
+    if(myKudos.empty()) {
+        std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, kudosTop, currentKudosColor);
+        myKudos.push_back(kudos.get());
+        requestAdd(std::move(kudos));
+    } else {
+        auto& lastKudos = myKudos[myKudos.size() - 1];
+        float endOfLastKudos = lastKudos -> getPositionX() + Kudos::Size;
+        float newKudosX = endOfLastKudos + spaceBetweenKudos;
+        std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(newKudosX, kudosTop, currentKudosColor);
+        kudos -> initialize();
+        myKudos.push_back(kudos.get());
+        requestAdd(std::move(kudos));
+    }
     this -> sceneListener -> onGameObjectsInSceneHaveChanged();
-    
-    std::cout << "Added new kudos at position x: " << newKudosX << ", y: " << kudosTop << "\n";
 }
 
 void Level1::onKudosLost() {
