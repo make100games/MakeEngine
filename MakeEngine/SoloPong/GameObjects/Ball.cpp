@@ -53,18 +53,9 @@ void Ball::initialize() {
 }
 
 void Ball::update(float deltaTime) {
-    // Check collision with top or bottom of screen
-    float canvasBottom = myCanvasBounds.bottom - Constants::HudHeight;
-    if(myTransform.y < myCanvasBounds.top) {
-        myTransform = myTransform.copyWithY(myCanvasBounds.top);
-        yVelocity *= -1;
-        myKudosManager -> loseKudos();
-    } else if((myTransform.y + size) > canvasBottom) {
-        myTransform = myTransform.copyWithY(canvasBottom - size);
-        yVelocity *= -1;
-        myKudosManager -> loseKudos();
-    }
-    
+    // Note that we have to check collision with top or bottom of screen using colliders and the onCollision()
+    // callback. The reason is because we modify the game objects array in the scene when we hit the top or bottom of
+    // the screen. And we are not allowed to modify the list of game objects in the update() method.
     // Check collision with left or right edge of screen
     if(myTransform.x < myCanvasBounds.left) {
         myTransform = myTransform.copyWithX(myCanvasBounds.left);
@@ -146,10 +137,16 @@ void Ball::onCollision(Collider other) {
         } else if(deltaX < 0) {
             myTransform.x = other.x;
         }
-    } else {
-        if (other.tag == "Paddle") {
-            performAngleBasedBounce(other);
-        }
+    } else if (other.tag == "Paddle") {
+        performAngleBasedBounce(other);
+    } else if (other.tag == "Boundary") {
+        myTransform.copyWithY(other.y + other.height);
+        yVelocity *= -1;
+        myKudosManager -> loseKudos();
+    } else if (other.tag == "HUD") {
+        myTransform.copyWithY(other.y - size);
+        yVelocity *= -1;
+        myKudosManager -> loseKudos();
     }
 }
 

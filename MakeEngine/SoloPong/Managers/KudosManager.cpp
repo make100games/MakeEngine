@@ -34,7 +34,7 @@ void KudosManager::startGame() {
     currentLevel = 0;
     currentKudosColor = levelColors[currentLevel];
     if(myListener != nullptr) {
-        myListener -> onStartedNewLevel(currentKudosColor, 10);
+        myListener -> onStartedNewLevel(currentKudosColor, 3);
     }
 }
 

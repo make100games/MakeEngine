@@ -1,46 +1,46 @@
 //
-//  Hud.cpp
+//  Boundary.cpp
 //  MakeEngine
 //
-//  Created by Make100Games on 07.02.26.
+//  Created by Make100Games on 08.02.26.
 //
 
-#include "Hud.hpp"
+#include "Boundary.hpp"
 #include "Rectangle.hpp"
 #include "Constants.hpp"
 
-static const std::string tag = "HUD";
+static const std::string tag = "Boundary";
+static const float Height = 50.0f;
 
-Hud::Hud() {
+Boundary::Boundary() {
     
 }
 
-Hud::~Hud() {
+Boundary::~Boundary() {
     
 }
 
-void Hud::initialize() {
+void Boundary::initialize() {
+    myCollider = Collider { 0, -Height, myBounds.right, 0, tag };
+}
+
+void Boundary::update(float deltaTime) {
     
 }
 
-void Hud::update(float deltaTime) {
-    
-}
-
-const std::unique_ptr<Renderable>& Hud::renderable() const {
+const std::unique_ptr<Renderable>& Boundary::renderable() const {
     return myRenderable;
 }
 
-Transform Hud::transform() {
+Transform Boundary::transform() {
     return myTransform;
 }
 
-RigidBody Hud::rigidBody() {
+RigidBody Boundary::rigidBody() {
     return myRigidBody;
 }
 
-void Hud::onCanvasBoundsChanged(Bounds bounds) {
-    myBounds = bounds;
+void Boundary::onCanvasBoundsChanged(Bounds bounds) {
     float left = 0.0f;
     float top = bounds.bottom - Constants::HudHeight;
     Vec3 color = Vec3 { 0.3f, 0.3f, 0.3f };
@@ -55,17 +55,16 @@ void Hud::onCanvasBoundsChanged(Bounds bounds) {
         bounds.right, bounds.bottom
     };
     myRenderable = std::make_unique<Rectangle>(vertices, color, tag);
-    myCollider = Collider { left, top, myBounds.right, Constants::HudHeight, tag };
 }
 
-Collider Hud::collider() {
+Collider Boundary::collider() {
     return myCollider;
 }
 
-void Hud::onCollision(Collider other) {
+void Boundary::onCollision(Collider other) {
     
 }
 
-void Hud::onKeyInput(KeyInput input) {
+void Boundary::onKeyInput(KeyInput input) {
     
 }

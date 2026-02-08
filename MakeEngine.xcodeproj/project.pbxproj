@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8D0545BC2F3157C300AEDDFC /* Logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D0545BA2F3157C300AEDDFC /* Logging.cpp */; };
+		8D17326A2F38D53100310A9D /* Boundary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D1732682F38D53100310A9D /* Boundary.cpp */; };
+		8D17326C2F392B0D00310A9D /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17326B2F392B0D00310A9D /* Scene.cpp */; };
 		8D17A5C32F2FEE8B003B7DC1 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D17A5C22F2FEE8B003B7DC1 /* main.mm */; };
 		8D17A5C62F2FEE9E003B7DC1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D17A5C52F2FEE9E003B7DC1 /* OpenGL.framework */; };
 		8D17A5C82F2FEF05003B7DC1 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D17A5C72F2FEF05003B7DC1 /* AppKit.framework */; };
@@ -40,6 +42,9 @@
 		8D0545BB2F3157C300AEDDFC /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
 		8D0E88112F33EC1E003797A4 /* RigidBody.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RigidBody.hpp; sourceTree = "<group>"; };
 		8D0E88142F33F01E003797A4 /* Vec2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vec2.hpp; sourceTree = "<group>"; };
+		8D1732682F38D53100310A9D /* Boundary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Boundary.cpp; sourceTree = "<group>"; };
+		8D1732692F38D53100310A9D /* Boundary.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Boundary.hpp; sourceTree = "<group>"; };
+		8D17326B2F392B0D00310A9D /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		8D17A5C22F2FEE8B003B7DC1 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		8D17A5C52F2FEE9E003B7DC1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8D17A5C72F2FEF05003B7DC1 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -119,6 +124,7 @@
 				8D17A5D72F2FEF93003B7DC1 /* Engine.cpp */,
 				8D17A5D82F2FEF93003B7DC1 /* math_utils.cpp */,
 				8D17A5D92F2FEF93003B7DC1 /* Scene.hpp */,
+				8D17326B2F392B0D00310A9D /* Scene.cpp */,
 				8D0545BA2F3157C300AEDDFC /* Logging.cpp */,
 				8D0545BB2F3157C300AEDDFC /* Logging.hpp */,
 				8D0E88112F33EC1E003797A4 /* RigidBody.hpp */,
@@ -169,6 +175,8 @@
 				8D5C0DC62F353EB3005A9CBA /* Kudos.hpp */,
 				8DAAEC542F37D3EC0025DFE7 /* Hud.cpp */,
 				8DAAEC552F37D3EC0025DFE7 /* Hud.hpp */,
+				8D1732682F38D53100310A9D /* Boundary.cpp */,
+				8D1732692F38D53100310A9D /* Boundary.hpp */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -267,12 +275,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D17A5C32F2FEE8B003B7DC1 /* main.mm in Sources */,
+				8D17326A2F38D53100310A9D /* Boundary.cpp in Sources */,
 				8D17A5DB2F2FEF93003B7DC1 /* Engine.cpp in Sources */,
 				8D17A5DC2F2FEF93003B7DC1 /* math_utils.cpp in Sources */,
 				8D17A5DA2F2FEF93003B7DC1 /* OpenGlRenderer.cpp in Sources */,
 				8D5C0DC72F353EB3005A9CBA /* Kudos.cpp in Sources */,
 				8DC3169B2F314A440063D7B8 /* Ball.cpp in Sources */,
 				8D7001442F2FF3C50075F49D /* Level1.cpp in Sources */,
+				8D17326C2F392B0D00310A9D /* Scene.cpp in Sources */,
 				8D7001472F2FF9F50075F49D /* Rectangle.cpp in Sources */,
 				8D0545BC2F3157C300AEDDFC /* Logging.cpp in Sources */,
 				8DAAEC562F37D3EC0025DFE7 /* Hud.cpp in Sources */,

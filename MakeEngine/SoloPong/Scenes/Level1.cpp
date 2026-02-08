@@ -14,6 +14,7 @@
 #include "Ball.hpp"
 #include "Constants.hpp"
 #include "Hud.hpp"
+#include "Boundary.hpp"
 
 Level1::Level1() {
     myKudosManager = std::make_unique<KudosManager>();
@@ -30,24 +31,17 @@ void Level1::onCanvasBoundsChanged(Bounds bounds) {
 
 void Level1::onStart() {
     myKudosManager -> setListener(this);
-    
+    // Add top boundary
+    requestAdd(std::make_unique<Boundary>());
     // Add HUD
-    myGameObjects.push_back(std::make_unique<Hud>());
+    requestAdd(std::make_unique<Hud>());
     // Add paddle and ball
-    myGameObjects.push_back(std::make_unique<Paddle>());
-    myGameObjects.push_back(std::make_unique<Ball>(myKudosManager.get()));
+    requestAdd(std::make_unique<Paddle>());
+    requestAdd(std::make_unique<Ball>(myKudosManager.get()));
     
     // By starting the game, the first level is loaded which causes the first Kudos to be added.
     // Make sure we add the Kudos last so that we can also reasily remove them by just removing the last item
     myKudosManager -> startGame();
-}
-
-void Level1::update() {
-    
-}
-
-std::vector<std::unique_ptr<GameObject>>& Level1::gameObjects() {
-    return myGameObjects;
 }
 
 void Level1::addSceneListener(SceneListener *listener) {
@@ -61,7 +55,7 @@ void Level1::onStartedNewLevel(Vec3 color, int maxKudosInLevel) {
     spaceBetweenKudos = calculateSpaceBetween(maxKudosInLevel);
     std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, kudosTop, currentKudosColor);
     myKudos.push_back(kudos.get());
-    myGameObjects.push_back(std::move(kudos));
+    requestAdd(std::move(kudos));
 }
 
 float Level1::calculateSpaceBetween(int numberOfItems) {
@@ -82,7 +76,7 @@ void Level1::onKudosEarned() {
     std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(newKudosX, kudosTop, currentKudosColor);
     kudos -> initialize();
     myKudos.push_back(kudos.get());
-    myGameObjects.push_back(std::move(kudos));
+    requestAdd(std::move(kudos));
     this -> sceneListener -> onGameObjectsInSceneHaveChanged();
     
     std::cout << "Added new kudos at position x: " << newKudosX << ", y: " << kudosTop << "\n";
@@ -91,8 +85,10 @@ void Level1::onKudosEarned() {
 void Level1::onKudosLost() {
     std::cout << "Kudos lost!\n";
     // make sure to remove the raw pointer (observer) first!
-    //myKudos.pop_back();
+    myKudos.pop_back();
     
     // remove owner second!
-    //myGameObjects.pop_back();
+    requestRemoveMostRecent();
+    
+    this -> sceneListener -> onGameObjectsInSceneHaveChanged();
 }

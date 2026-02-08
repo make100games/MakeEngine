@@ -36,7 +36,7 @@ void Engine::start() {
     if(currentScene) {
         currentScene -> addSceneListener(this);
         currentScene -> onCanvasBoundsChanged(myCanvasBounds);
-        currentScene -> onStart();
+        currentScene -> initialize();
         std::unordered_map<std::string, std::vector<Renderable*>> renderBuckets;
         auto& gameObjects = currentScene -> gameObjects();
         for (auto& go : gameObjects) {
@@ -59,11 +59,10 @@ void Engine::update() {
     float deltaTime = measureTimeSinceLastUpdate();
     
     if(currentScene) {
-        currentScene -> update();
+        currentScene -> update(deltaTime);
         auto& gameObjects = currentScene -> gameObjects();
         std::unordered_map<std::string, std::pair<Transform, std::vector<Renderable*>>> renderObjects;
         for (auto& go : gameObjects) {
-            go -> update(deltaTime);
             auto transform = go -> transform();
             auto& renderable = go -> renderable();
             auto& renderObject = renderObjects[renderable -> renderTag()];
