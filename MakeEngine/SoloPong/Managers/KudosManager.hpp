@@ -13,10 +13,11 @@
 #include <vector>
 #include "Vec3.hpp"
 #include <iostream>
+#include "GameManager.hpp"
 
 class KudosManager {
 public:
-    KudosManager();
+    KudosManager(GameManager* gameManager);
     ~KudosManager();
     
     void setListener(KudosManagerListener* listener);
@@ -35,6 +36,7 @@ private:
     int currentLevel = 0;
     std::vector<Vec3> levelColors;
     Vec3 currentKudosColor;
+    GameManager* myGameManager;
 };
 
 #endif /* KudosManager_hpp */

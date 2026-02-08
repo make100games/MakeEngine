@@ -7,7 +7,8 @@
 
 #include "KudosManager.hpp"
 
-KudosManager::KudosManager() {
+KudosManager::KudosManager(GameManager* gameManager) {
+    myGameManager = gameManager;
     levelColors = std::vector<Vec3> {
         Vec3 {1.0f, 0.0f, 0.0f},
         Vec3 {0.0f, 1.0f, 0.0f},
@@ -40,12 +41,15 @@ void KudosManager::startGame() {
 
 void KudosManager::earnKudos() {
     numberOfKudos++;
+    std::cout << "Earned Kudos. Current number: " << numberOfKudos << "\n";
     if(numberOfKudos >= MaxKudosPerLevel) {
         numberOfKudos = 1;
         currentLevel++;
         if(currentLevel >= levelColors.size()) {
             // Player wins!
-            // TODO notify GameManager!
+            if(myGameManager != nullptr) {
+                myGameManager -> winGame();
+            }
         } else {
             currentKudosColor = levelColors[currentLevel];
             // TODO notify KudosManagerListener that we reached new level and pass new color
@@ -65,7 +69,9 @@ void KudosManager::loseKudos() {
     std::cout << "Lost Kudos. Current number: " << numberOfKudos << "\n";
     if(numberOfKudos <= 0) {
         // Player lost!
-        // TODO notify GameManager!
+        if(myGameManager != nullptr) {
+            myGameManager -> loseGame();
+        }
     } else {
         if(myListener != nullptr) {
             myListener -> onKudosLost();

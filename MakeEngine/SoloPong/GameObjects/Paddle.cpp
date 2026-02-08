@@ -14,7 +14,8 @@
 static const std::string tag = "Paddle";
 static const float paddleVelocity = 500.0f;
 
-Paddle::Paddle():myTransform(Transform { 0.0f, 0.0f, tag }) {
+Paddle::Paddle(GameManager* gameManager):myTransform(Transform { 0.0f, 0.0f, tag }) {
+    myGameManager = gameManager;
     // Note: Place top left vertex at 0,0. Otherwise you bake in an offset
     float left = 0.0f;
     float top = 0.0f;
@@ -142,6 +143,9 @@ void Paddle::onKeyInput(KeyInput keyInput) {
     }
 }
 
+void Paddle::endGame() {
+    // Reset paddle to original position
+}
 
 
 

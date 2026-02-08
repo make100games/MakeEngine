@@ -17,10 +17,11 @@
 #include "Collider.hpp"
 #include "KeyInput.hpp"
 #include "RigidBody.hpp"
+#include "GameManager.hpp"
 
 class Paddle : public GameObject {
 public:
-    Paddle();
+    Paddle(GameManager* gameManager);
     ~Paddle();
     
     void initialize() override;
@@ -41,6 +42,8 @@ public:
     
     void onKeyInput(KeyInput keyInput) override;
     
+    void endGame();
+    
 private:
     std::unique_ptr<Renderable> myRenderable;
     Transform myTransform;
@@ -51,6 +54,7 @@ private:
     float yVelocity = 0.0f;
     float width = 150.0f;
     float height = 20.0f;
+    GameManager* myGameManager;
 };
 
 #endif /* Paddle_hpp */

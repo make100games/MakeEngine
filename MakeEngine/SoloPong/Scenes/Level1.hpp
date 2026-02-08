@@ -17,8 +17,12 @@
 #include "Kudos.hpp"
 #include "KudosManager.hpp"
 #include "Vec3.hpp"
+#include "GameManager.hpp"
+#include "GameManagerListener.hpp"
+#include "Ball.hpp"
+#include "Paddle.hpp"
 
-class Level1 : public Scene, KudosManagerListener {
+class Level1 : public Scene, KudosManagerListener, GameManagerListener {
 public:
     Level1();
     ~Level1();
@@ -36,7 +40,13 @@ public:
     
     void onKudosLost() override;
     
+    // Methods from GameManagerListener
+    virtual void onGameLost() override;
+    
+    virtual void onGameWon() override;
+    
 private:
+    std::unique_ptr<GameManager> myGameManager;
     std::unique_ptr<KudosManager> myKudosManager;
     SceneListener* sceneListener;
     Bounds myCanvasBounds;
@@ -50,7 +60,11 @@ private:
     float spaceBetweenKudos = 0;
     Vec3 currentKudosColor;
     
+    Ball* myBall;
+    Paddle* myPaddle;
+    
     float calculateSpaceBetween(int numberOfItems);
+    void removeKudos();
 };
 
 #endif /* Level1_hpp */

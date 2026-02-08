@@ -20,10 +20,11 @@
 #include "Vec2.hpp"
 #include "math_utils.hpp"
 #include "KudosManager.hpp"
+#include "GameManager.hpp"
 
 class Ball : public GameObject {
 public:
-    Ball(KudosManager* kudosManager);
+    Ball(KudosManager* kudosManager, GameManager* gameManager);
     ~Ball();
     
     void initialize() override;
@@ -44,8 +45,11 @@ public:
     
     void onKeyInput(KeyInput input) override;
     
+    void endGame();
+    
 private:
     KudosManager* myKudosManager;
+    GameManager* myGameManager;
     std::unique_ptr<Renderable> myRenderable;
     Transform myTransform;
     Bounds myCanvasBounds;

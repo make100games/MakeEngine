@@ -16,7 +16,9 @@
 #include "Hud.hpp"
 
 Level1::Level1() {
-    myKudosManager = std::make_unique<KudosManager>();
+    myGameManager = std::make_unique<GameManager>();
+    myGameManager -> setListener(this);
+    myKudosManager = std::make_unique<KudosManager>(myGameManager.get());
 }
 
 Level1::~Level1() {
@@ -33,8 +35,12 @@ void Level1::onStart() {
     // Add HUD
     requestAdd(std::make_unique<Hud>());
     // Add paddle and ball
-    requestAdd(std::make_unique<Paddle>());
-    requestAdd(std::make_unique<Ball>(myKudosManager.get()));
+    std::unique_ptr<Paddle> paddle = std::make_unique<Paddle>(myGameManager.get());
+    myPaddle = paddle.get();
+    requestAdd(std::move(paddle));
+    std::unique_ptr<Ball> ball = std::make_unique<Ball>(myKudosManager.get(), myGameManager.get());
+    myBall = ball.get();
+    requestAdd(std::move(ball));
     
     // By starting the game, the first level is loaded which causes the first Kudos to be added.
     // Make sure we add the Kudos last so that we can also reasily remove them by just removing the last item
@@ -50,9 +56,6 @@ void Level1::onStartedNewLevel(Vec3 color, int maxKudosInLevel) {
     currentKudosColor = color;
     kudosTop = hudTop + (Constants::HudHeight / 2) - (Kudos::Size / 2);
     spaceBetweenKudos = calculateSpaceBetween(maxKudosInLevel);
-    /*std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, kudosTop, currentKudosColor);
-    myKudos.push_back(kudos.get());
-    requestAdd(std::move(kudos));*/
 }
 
 float Level1::calculateSpaceBetween(int numberOfItems) {
@@ -92,4 +95,33 @@ void Level1::onKudosLost() {
     requestRemoveMostRecent();
     
     this -> sceneListener -> onGameObjectsInSceneHaveChanged();
+}
+
+void Level1::onGameWon() {
+    // TODO: Show some green screen for a second or until player hits space bar or something
+    if(myBall != nullptr) {
+        myBall -> endGame();
+    }
+    if(myPaddle != nullptr) {
+        myPaddle -> endGame();
+    }
+    removeKudos();
+}
+
+void Level1::onGameLost() {
+    // TODO: Show some red screen for a second or until player hits space bar or something
+    if(myBall != nullptr) {
+        myBall -> endGame();
+    }
+    if(myPaddle != nullptr) {
+        myPaddle -> endGame();
+    }
+    removeKudos();
+}
+
+void Level1::removeKudos() {
+    for(auto& kudos : myKudos) {
+        requestRemove(kudos);
+    }
+    myKudos.clear();
 }

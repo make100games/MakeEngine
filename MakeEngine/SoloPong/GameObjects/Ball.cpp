@@ -18,7 +18,8 @@ static const float ballVelocity = 180.0f;
 // Amount by which to gradually increase speed of ball
 static const float increaseInSpeed = 5.0f;
 
-Ball::Ball(KudosManager* kudosManager):myTransform(Transform {0.0f, 0.0f, tag}) {
+Ball::Ball(KudosManager* kudosManager, GameManager* gameManager):myTransform(Transform {0.0f, 0.0f, tag}) {
+    myGameManager = gameManager;
     myKudosManager = kudosManager;
     // Note: Place top left vertex at 0,0. Otherwise you bake in an offset
     float left = 0.0f;
@@ -53,33 +54,35 @@ void Ball::initialize() {
 }
 
 void Ball::update(float deltaTime) {
-    // Check collision with top or bottom of screen
-    float canvasBottom = myCanvasBounds.bottom - Constants::HudHeight;
-    if(myTransform.y < myCanvasBounds.top) {
-        myTransform = myTransform.copyWithY(myCanvasBounds.top);
-        yVelocity *= -1;
-        myKudosManager -> loseKudos();
-    } else if((myTransform.y + size) > canvasBottom) {
-        myTransform = myTransform.copyWithY(canvasBottom - size);
-        yVelocity *= -1;
-        myKudosManager -> loseKudos();
+    if(myGameManager -> gameStarted()) {
+        // Check collision with top or bottom of screen
+        float canvasBottom = myCanvasBounds.bottom - Constants::HudHeight;
+        if(myTransform.y < myCanvasBounds.top) {
+            myTransform = myTransform.copyWithY(myCanvasBounds.top);
+            yVelocity *= -1;
+            myKudosManager -> loseKudos();
+        } else if((myTransform.y + size) > canvasBottom) {
+            myTransform = myTransform.copyWithY(canvasBottom - size);
+            yVelocity *= -1;
+            myKudosManager -> loseKudos();
+        }
+        
+        if(myTransform.x < myCanvasBounds.left) {
+            myTransform = myTransform.copyWithX(myCanvasBounds.left);
+            xVelocity *= -1;
+        } else if((myTransform.x + size) > myCanvasBounds.right) {
+            myTransform = myTransform.copyWithX(myCanvasBounds.right - size);
+            xVelocity *= -1;
+        }
+        
+        myTransform.x += xVelocity * deltaTime;
+        myTransform.y += yVelocity * deltaTime;
+        myCollider = myCollider.copyWithX(myTransform.x).copyWithY(myTransform.y);
+        
+        increaseSpeedOverTime(deltaTime);
+        
+        myRigidBody = RigidBody { xVelocity, yVelocity };
     }
-
-    if(myTransform.x < myCanvasBounds.left) {
-        myTransform = myTransform.copyWithX(myCanvasBounds.left);
-        xVelocity *= -1;
-    } else if((myTransform.x + size) > myCanvasBounds.right) {
-        myTransform = myTransform.copyWithX(myCanvasBounds.right - size);
-        xVelocity *= -1;
-    }
-    
-    myTransform.x += xVelocity * deltaTime;
-    myTransform.y += yVelocity * deltaTime;
-    myCollider = myCollider.copyWithX(myTransform.x).copyWithY(myTransform.y);
-    
-    increaseSpeedOverTime(deltaTime);
-    
-    myRigidBody = RigidBody { xVelocity, yVelocity };
 }
 
 void Ball::increaseSpeedOverTime(float deltaTime) {
@@ -213,5 +216,18 @@ void Ball::bounceOffBallDependingOnPaddleSpeed(Collider other, Vec2 paddleNormal
 }
 
 void Ball::onKeyInput(KeyInput input) {
-    // No-op
+    if(input.interaction == KeyInteraction::KeyDown && input.keyCode == KeyCode::Space) {
+        myGameManager -> startGame();
+    }
+}
+
+void Ball::endGame() {
+    // Reset ball to original position and stop it from moving
+    xVelocity = 0.0f;
+    yVelocity = ballVelocity;
+    
+    float x = (myCanvasBounds.right / 2) - (size / 2);
+    float y = myCanvasBounds.top + 50;
+    myTransform = myTransform.copyWithX(x);
+    myTransform = myTransform.copyWithY(y);
 }
