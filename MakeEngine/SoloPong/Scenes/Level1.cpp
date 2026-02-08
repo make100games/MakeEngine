@@ -14,7 +14,6 @@
 #include "Ball.hpp"
 #include "Constants.hpp"
 #include "Hud.hpp"
-#include "Boundary.hpp"
 
 Level1::Level1() {
     myKudosManager = std::make_unique<KudosManager>();
@@ -31,8 +30,6 @@ void Level1::onCanvasBoundsChanged(Bounds bounds) {
 
 void Level1::onStart() {
     myKudosManager -> setListener(this);
-    // Add top boundary
-    requestAdd(std::make_unique<Boundary>());
     // Add HUD
     requestAdd(std::make_unique<Hud>());
     // Add paddle and ball
