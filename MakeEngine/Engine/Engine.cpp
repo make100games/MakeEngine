@@ -160,7 +160,6 @@ void Engine::reDrawObjectsInScene() {
     std::unordered_map<std::string, std::vector<Renderable*>> renderBuckets;
     auto& gameObjects = currentScene -> gameObjects();
     for (auto& go : gameObjects) {
-        std::cout << ">GameObject: " << go -> renderable() -> renderTag() << "\n";
         auto& renderable = go -> renderable();
         auto renderables = renderBuckets[renderable -> renderTag()];
         renderables.push_back(renderable.get());
