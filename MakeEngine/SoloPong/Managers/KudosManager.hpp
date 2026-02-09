@@ -30,7 +30,7 @@ public:
     void loseKudos();
     
 private:
-    static const int MaxKudosPerLevel = 10;
+    static const int MaxKudosPerLevel = 3;
     KudosManagerListener* myListener;
     int numberOfKudos = 0;
     int currentLevel = 0;

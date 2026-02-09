@@ -35,14 +35,14 @@ void KudosManager::startGame() {
     currentLevel = 0;
     currentKudosColor = levelColors[currentLevel];
     if(myListener != nullptr) {
-        myListener -> onStartedNewLevel(currentKudosColor, 3);
+        myListener -> onStartedNewLevel(currentKudosColor, MaxKudosPerLevel);
     }
 }
 
 void KudosManager::earnKudos() {
     numberOfKudos++;
     std::cout << "Earned Kudos. Current number: " << numberOfKudos << "\n";
-    if(numberOfKudos >= MaxKudosPerLevel) {
+    if(numberOfKudos > MaxKudosPerLevel) {
         numberOfKudos = 1;
         currentLevel++;
         if(currentLevel >= levelColors.size()) {
@@ -52,9 +52,9 @@ void KudosManager::earnKudos() {
             }
         } else {
             currentKudosColor = levelColors[currentLevel];
-            // TODO notify KudosManagerListener that we reached new level and pass new color
+            // Notify KudosManagerListener that we reached new level and pass new color
             if(myListener != nullptr) {
-                myListener -> onStartedNewLevel(currentKudosColor, 10);
+                myListener -> onStartedNewLevel(currentKudosColor, MaxKudosPerLevel);
             }
         }
     } else {

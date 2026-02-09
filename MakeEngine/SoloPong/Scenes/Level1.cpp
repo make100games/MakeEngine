@@ -52,7 +52,7 @@ void Level1::addSceneListener(SceneListener *listener) {
 }
 
 void Level1::onStartedNewLevel(Vec3 color, int maxKudosInLevel) {
-    std::cout << "Started new level";
+    std::cout << "Started new level\n";
     currentKudosColor = color;
     kudosTop = hudTop + (Constants::HudHeight / 2) - (Kudos::Size / 2);
     spaceBetweenKudos = calculateSpaceBetween(maxKudosInLevel);
@@ -67,8 +67,6 @@ float Level1::calculateSpaceBetween(int numberOfItems) {
 }
 
 void Level1::onKudosEarned() {
-    std::cout << "Kudos earned!\n";
-    
     // We can assume the Kudos are always the last objects in the scene. A bit fragile but fine for now.
     if(myKudos.empty()) {
         std::unique_ptr<Kudos> kudos = std::make_unique<Kudos>(spaceBetweenKudos, kudosTop, currentKudosColor);
@@ -87,7 +85,6 @@ void Level1::onKudosEarned() {
 }
 
 void Level1::onKudosLost() {
-    std::cout << "Kudos lost!\n";
     // make sure to remove the raw pointer (observer) first!
     myKudos.pop_back();
     
