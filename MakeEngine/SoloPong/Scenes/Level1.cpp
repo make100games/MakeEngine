@@ -116,7 +116,9 @@ void Level1::onGameWon() {
 }
 
 void Level1::onGameLost() {
-    // TODO: Show some red screen for a second or until player hits space bar or something
+    std::unique_ptr<GameOverScreen> gameOverScreen = std::make_unique<GameOverScreen>(Vec3 {1.0f, 0.0f, 0.0}, myGameManager.get());
+    myGameOverScreen = gameOverScreen.get();
+    requestAdd(std::move(gameOverScreen));
     if(myBall != nullptr) {
         myBall -> endGame();
     }
