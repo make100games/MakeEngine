@@ -74,6 +74,8 @@ void Engine::update() {
         // There is probably a much more efficient way to do all this but I wanted to make sure that I had as few draw calls as possible in the renderer and to do that I batched Renderables that share the same tag into one draw call. Bridging this with the GameObject API (and avoiding having to expose too many of the implementation details of the Renderer to the GameObjects) I have to bring all this together here.
         renderer -> renderFrame(renderObjects);
         checkForCollisions(gameObjects);
+        currentScene -> processPendingRemovals();
+        currentScene -> processPendingAdditions();
     }
     if(objectsInSceneHaveChanged) {
         reDrawObjectsInScene();
@@ -158,6 +160,7 @@ void Engine::reDrawObjectsInScene() {
     std::unordered_map<std::string, std::vector<Renderable*>> renderBuckets;
     auto& gameObjects = currentScene -> gameObjects();
     for (auto& go : gameObjects) {
+        std::cout << ">GameObject: " << go -> renderable() -> renderTag() << "\n";
         auto& renderable = go -> renderable();
         auto renderables = renderBuckets[renderable -> renderTag()];
         renderables.push_back(renderable.get());

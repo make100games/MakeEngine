@@ -35,6 +35,16 @@ public:
     virtual void update(float deltaTime) final;
     
     /**
+     Remove any GameObjects that were scheduled to be removed during the current update loop.
+     */
+    virtual void processPendingRemovals() final;
+    
+    /**
+     Add any GameObjects that were scheduled to be added during the current update loop.
+     */
+    virtual void processPendingAdditions() final;
+    
+    /**
      Called the very first time after onStart() has been called. After that this is called every frame.
      
      A C++ n00b note: Has to be a vector of GameObject pointers. Otherwise you will get the Allocation issue due to object slicing. Holy bananas, Spiderman. Beginner stuff for C++ experts but I'm a n00b here so cut me some slack... Also, needs to be a reference to said vector so that the Scene can continue to own the vector. The reason why the scene should continue to own the vector is because if the scene wants to hold the game objects in a private variable (to avoid recreating the list each time this method is called), this variable would get copied by this method and the copy would be returned. Copying a vector means each entry is copied. unique_ptrs cannot be copied however (as they are, as the name suggests, unique, duh). This attempted copying of a unique_ptr leads to a compiler error (construct_at or something like that).
@@ -60,9 +70,6 @@ private:
     std::vector<std::unique_ptr<GameObject>> myGameObjects;
     std::vector<GameObject*> pendingRemoval;
     std::vector<std::unique_ptr<GameObject>> pendingAdd;
-    
-    virtual void processPendingRemovals() final;
-    virtual void processPendingAdditions() final;
 };
 
 #endif /* Scene_hpp */

@@ -21,8 +21,6 @@ void Scene::update(float deltaTime) {
     for(auto& gameObject : myGameObjects) {
         gameObject -> update(deltaTime);
     }
-    processPendingRemovals();
-    processPendingAdditions();
 }
 
 void Scene::requestAdd(std::unique_ptr<GameObject> gameObject) {
