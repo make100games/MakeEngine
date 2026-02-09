@@ -145,6 +145,10 @@ void Paddle::onKeyInput(KeyInput keyInput) {
 
 void Paddle::endGame() {
     // Reset paddle to original position
+    auto xPos = (myCanvasBounds.right / 2) - (width / 2);
+    auto yPos = (myCanvasBounds.bottom / 2) - (height / 2);
+    myTransform = myTransform.copyWithX(xPos);
+    myTransform = myTransform.copyWithY(yPos);
 }
 
 
