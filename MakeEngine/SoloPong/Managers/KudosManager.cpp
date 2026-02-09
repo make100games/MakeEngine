@@ -43,7 +43,7 @@ void KudosManager::earnKudos() {
     numberOfKudos++;
     std::cout << "Earned Kudos. Current number: " << numberOfKudos << "\n";
     if(numberOfKudos > MaxKudosPerLevel) {
-        numberOfKudos = 1;
+        numberOfKudos = 0;
         currentLevel++;
         if(currentLevel >= levelColors.size()) {
             // Player wins!

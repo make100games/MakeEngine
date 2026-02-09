@@ -56,6 +56,13 @@ void Level1::onStartedNewLevel(Vec3 color, int maxKudosInLevel) {
     currentKudosColor = color;
     kudosTop = hudTop + (Constants::HudHeight / 2) - (Kudos::Size / 2);
     spaceBetweenKudos = calculateSpaceBetween(maxKudosInLevel);
+    
+    // Remove all kudos that are currently there
+    for(auto kudos : myKudos) {
+        requestRemove(kudos);
+    }
+    myKudos.clear();
+    this -> sceneListener -> onGameObjectsInSceneHaveChanged();
 }
 
 float Level1::calculateSpaceBetween(int numberOfItems) {

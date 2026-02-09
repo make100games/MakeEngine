@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include "Scene.hpp"
+#include <iostream>
 
 void Scene::initialize() {
     onStart();
