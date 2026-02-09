@@ -21,6 +21,9 @@ void GameManager::setListener(GameManagerListener *listener) {
 
 void GameManager::startGame() {
     myGameStarted = true;
+    if(myListener != nullptr) {
+        myListener -> onGameStarted();
+    }
 }
 
 bool GameManager::gameStarted() {

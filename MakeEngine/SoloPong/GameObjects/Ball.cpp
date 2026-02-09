@@ -118,38 +118,40 @@ Collider Ball::collider() {
 }
 
 void Ball::onCollision(Collider other) {
-    // Do a simple overlap resolution to see whether the ball hit the sides of an object or the top/bottom of it. If it hit the sides, invert the x velocity. If it hit the top/bottom, invert the y velocity. Courtesy of Chat GPT :)
-    Collider thisCollider = myCollider; // Get the ball's current collider bounds
-
-    // Compute the centers
-    float thisCenterX = thisCollider.x + thisCollider.width / 2.0f;
-    float thisCenterY = thisCollider.y + thisCollider.height / 2.0f;
-    float otherCenterX = other.x + other.width / 2.0f;
-    float otherCenterY = other.y + other.height / 2.0f;
-
-    // Compute the current overlap (assuming axis-aligned rectangles)
-    float deltaX = thisCenterX - otherCenterX;
-    float deltaY = thisCenterY - otherCenterY;
-
-    float combinedHalfWidths = (thisCollider.width + other.width) / 2.0f;
-    float combinedHalfHeights = (thisCollider.height + other.height) / 2.0f;
-
-    float overlapX = combinedHalfWidths - std::abs(deltaX);
-    float overlapY = combinedHalfHeights - std::abs(deltaY);
-
-    // Determine direction of collision
-    if (overlapX < overlapY) {
-        // Horizontal collision → invert X velocity
-        xVelocity *= -1;
-        if(deltaX > 0) {
-            // Collided with right side
-            // Position ball at the edge of collision to avoid spurious double collisions? Not sure if this will do anything but it's an effort to fix some bugs where the ball sometimes just plows through multiple rows of bricks
-            myTransform.x = other.x + other.width;
-        } else if(deltaX < 0) {
-            myTransform.x = other.x;
+    if(myGameManager -> gameStarted()) {
+        // Do a simple overlap resolution to see whether the ball hit the sides of an object or the top/bottom of it. If it hit the sides, invert the x velocity. If it hit the top/bottom, invert the y velocity. Courtesy of Chat GPT :)
+        Collider thisCollider = myCollider; // Get the ball's current collider bounds
+        
+        // Compute the centers
+        float thisCenterX = thisCollider.x + thisCollider.width / 2.0f;
+        float thisCenterY = thisCollider.y + thisCollider.height / 2.0f;
+        float otherCenterX = other.x + other.width / 2.0f;
+        float otherCenterY = other.y + other.height / 2.0f;
+        
+        // Compute the current overlap (assuming axis-aligned rectangles)
+        float deltaX = thisCenterX - otherCenterX;
+        float deltaY = thisCenterY - otherCenterY;
+        
+        float combinedHalfWidths = (thisCollider.width + other.width) / 2.0f;
+        float combinedHalfHeights = (thisCollider.height + other.height) / 2.0f;
+        
+        float overlapX = combinedHalfWidths - std::abs(deltaX);
+        float overlapY = combinedHalfHeights - std::abs(deltaY);
+        
+        // Determine direction of collision
+        if (overlapX < overlapY) {
+            // Horizontal collision → invert X velocity
+            xVelocity *= -1;
+            if(deltaX > 0) {
+                // Collided with right side
+                // Position ball at the edge of collision to avoid spurious double collisions? Not sure if this will do anything but it's an effort to fix some bugs where the ball sometimes just plows through multiple rows of bricks
+                myTransform.x = other.x + other.width;
+            } else if(deltaX < 0) {
+                myTransform.x = other.x;
+            }
+        } else if (other.tag == "Paddle") {
+            performAngleBasedBounce(other);
         }
-    } else if (other.tag == "Paddle") {
-        performAngleBasedBounce(other);
     }
 }
 

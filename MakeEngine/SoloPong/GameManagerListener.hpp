@@ -15,6 +15,8 @@ public:
     virtual void onGameLost() = 0;
     
     virtual void onGameWon() = 0;
+    
+    virtual void onGameStarted() = 0;
 };
 
 #endif /* GameManagerListener_hpp */

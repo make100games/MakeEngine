@@ -36,7 +36,7 @@ void Engine::start() {
     }
     if(currentScene) {
         currentScene -> addSceneListener(this);
-        currentScene -> onCanvasBoundsChanged(myCanvasBounds);
+        currentScene -> changeCanvasBounds(myCanvasBounds);
         currentScene -> initialize();
         std::unordered_map<std::string, std::vector<Renderable*>> renderBuckets;
         auto& gameObjects = currentScene -> gameObjects();

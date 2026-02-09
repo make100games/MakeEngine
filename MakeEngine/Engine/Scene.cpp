@@ -14,6 +14,15 @@ void Scene::initialize() {
     processPendingAdditions();
 }
 
+void Scene::changeCanvasBounds(Bounds bounds) {
+    myCanvasBounds = bounds;
+    onCanvasBoundsChanged();
+}
+
+Bounds Scene::getCanvasBounds() {
+    return myCanvasBounds;
+}
+
 std::vector<std::unique_ptr<GameObject>>& Scene::gameObjects() {
     return myGameObjects;
 }
@@ -36,8 +45,12 @@ void Scene::requestRemoveMostRecent() {
     pendingRemoval.push_back(gameObjects()[gameObjects().size() - 1].get());
 }
 
+// FIXME: We have the steps of calling onCanvasBoundsChanged and initialize on the GameObject in 2 places: Here and in the Engine class as well. That is ugly and
+// very brittle. Need to unify and clean up this whole lifecycle handling. It's a mess right now.
 void Scene::processPendingAdditions() {
     for(auto& gameObject : pendingAdd) {
+        gameObject -> onCanvasBoundsChanged(myCanvasBounds);
+        gameObject -> initialize();
         myGameObjects.push_back(std::move(gameObject));
     }
     pendingAdd.clear();

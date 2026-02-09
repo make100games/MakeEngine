@@ -14,6 +14,7 @@
 #include "Ball.hpp"
 #include "Constants.hpp"
 #include "Hud.hpp"
+#include "GameOverScreen.hpp"
 
 Level1::Level1() {
     myGameManager = std::make_unique<GameManager>();
@@ -25,9 +26,8 @@ Level1::~Level1() {
     
 }
 
-void Level1::onCanvasBoundsChanged(Bounds bounds) {
-    myCanvasBounds = bounds;
-    hudTop = myCanvasBounds.bottom - Constants::HudHeight;
+void Level1::onCanvasBoundsChanged() {
+    hudTop = getCanvasBounds().bottom - Constants::HudHeight;
 }
 
 void Level1::onStart() {
@@ -66,7 +66,7 @@ void Level1::onStartedNewLevel(Vec3 color, int maxKudosInLevel) {
 }
 
 float Level1::calculateSpaceBetween(int numberOfItems) {
-    float canvasWidth = myCanvasBounds.right - myCanvasBounds.left;
+    float canvasWidth = getCanvasBounds().right - getCanvasBounds().left;
     float leftOverSpace = canvasWidth - (numberOfItems * Kudos::Size);
     float numberOfSpaces = numberOfItems + 1;
     float spaceBetweenKudos = leftOverSpace / numberOfSpaces;
@@ -102,7 +102,10 @@ void Level1::onKudosLost() {
 }
 
 void Level1::onGameWon() {
-    // TODO: Show some green screen for a second or until player hits space bar or something
+    std::cout << "You beat the game!\n";
+    std::unique_ptr<GameOverScreen> gameOverScreen = std::make_unique<GameOverScreen>(Vec3 {0.0f, 1.0f, 0.0}, myGameManager.get());
+    myGameOverScreen = gameOverScreen.get();
+    requestAdd(std::move(gameOverScreen));
     if(myBall != nullptr) {
         myBall -> endGame();
     }
@@ -121,6 +124,13 @@ void Level1::onGameLost() {
         myPaddle -> endGame();
     }
     removeKudos();
+}
+
+void Level1::onGameStarted() {
+    if(myGameOverScreen != nullptr){
+        requestRemove(myGameOverScreen);
+        myGameOverScreen = nullptr;
+    }
 }
 
 void Level1::removeKudos() {

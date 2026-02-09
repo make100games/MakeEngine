@@ -21,13 +21,14 @@
 #include "GameManagerListener.hpp"
 #include "Ball.hpp"
 #include "Paddle.hpp"
+#include "GameOverScreen.hpp"
 
 class Level1 : public Scene, KudosManagerListener, GameManagerListener {
 public:
     Level1();
     ~Level1();
     
-    void onCanvasBoundsChanged(Bounds bounds) override;
+    void onCanvasBoundsChanged() override;
     
     void onStart() override;
     
@@ -45,11 +46,13 @@ public:
     
     virtual void onGameWon() override;
     
+    virtual void onGameStarted() override;
+    
 private:
     std::unique_ptr<GameManager> myGameManager;
     std::unique_ptr<KudosManager> myKudosManager;
     SceneListener* sceneListener;
-    Bounds myCanvasBounds;
+    GameOverScreen* myGameOverScreen;
     
     // This setup is a bit ugly and fragile. We have a list of GameObjects (managed by the Scene abstract class). This is the list that owns the GameObjects
     // But we also have a list of Kudos that are just raw pointers to Kudos objects. It is therefore important in

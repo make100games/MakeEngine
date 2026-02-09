@@ -20,14 +20,14 @@ public:
     virtual ~Scene() = default;
     
     /**
-     Called when the bounds of the canvas have changed. The canvas is the area in the screen in which the entire sceen is drawn. Initially this is called before any of the other methods in the Scene are called and it can be called any number of times afterwards.
-     */
-    virtual void onCanvasBoundsChanged(Bounds bounds) = 0;
-    
-    /**
      Initializes the Scene. Called after the very first time the canvas bounds have changed and before the GameObjects are queried for the first time.
      */
     virtual void initialize() final;
+    
+    /**
+     Changes the canvas bounds of the scene. This method internally invokes onCanvasBoundsChanged of all the GameObjects in the Scene as well as of the Scene subclass.
+     */
+    virtual void changeCanvasBounds(Bounds bounds);
     
     /**
      Called each frame. Scene updates all GameObjects and processes any additions or removals of GameObjects.
@@ -59,6 +59,16 @@ protected:
      */
     virtual void onStart() = 0;
     
+    /**
+     Called when the bounds of the canvas have changed. The canvas is the area in the screen in which the entire sceen is drawn. Initially this is called before any of the other methods in the Scene are called and it can be called any number of times afterwards. Derived Scenes can use getCanvasBounds() to obtain the currently set bounds at this point in time.
+     */
+    virtual void onCanvasBoundsChanged() = 0;
+    
+    /**
+     Allows a derived Scene to query the currently set canvas bounds.
+     */
+    virtual Bounds getCanvasBounds() final;
+    
     virtual void requestRemove(GameObject* gameObject) final;
     /**
      Request to remove the most recently added GameObject.
@@ -67,6 +77,7 @@ protected:
     virtual void requestAdd(std::unique_ptr<GameObject> gameObject) final;
     
 private:
+    Bounds myCanvasBounds;
     std::vector<std::unique_ptr<GameObject>> myGameObjects;
     std::vector<GameObject*> pendingRemoval;
     std::vector<std::unique_ptr<GameObject>> pendingAdd;
