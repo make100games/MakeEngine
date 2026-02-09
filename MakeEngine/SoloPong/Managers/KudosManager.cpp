@@ -32,6 +32,10 @@ void KudosManager::setListener(KudosManagerListener *listener) {
 }
 
 void KudosManager::startGame() {
+    resetGame();
+}
+
+void KudosManager::resetGame() {
     currentLevel = 0;
     currentKudosColor = levelColors[currentLevel];
     if(myListener != nullptr) {
@@ -71,6 +75,7 @@ void KudosManager::loseKudos() {
         // Player lost!
         if(myGameManager != nullptr) {
             myGameManager -> loseGame();
+            resetGame();
         }
     } else {
         if(myListener != nullptr) {

@@ -37,6 +37,8 @@ private:
     std::vector<Vec3> levelColors;
     Vec3 currentKudosColor;
     GameManager* myGameManager;
+    
+    void resetGame();
 };
 
 #endif /* KudosManager_hpp */
