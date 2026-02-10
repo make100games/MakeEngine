@@ -28,6 +28,7 @@
 		8DF2828C2F3BD40A00D99775 /* Rocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF2828A2F3BD40A00D99775 /* Rocket.cpp */; };
 		8DF2828F2F3BDEAB00D99775 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF2828D2F3BDEAB00D99775 /* Texture.cpp */; };
 		8DF282932F3BE7D600D99775 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF282912F3BE7D600D99775 /* Sprite.cpp */; };
+		8DF282992F3BE92800D99775 /* SpriteRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF282972F3BE92800D99775 /* SpriteRenderer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -99,6 +100,8 @@
 		8DF282912F3BE7D600D99775 /* Sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
 		8DF282922F3BE7D600D99775 /* Sprite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sprite.hpp; sourceTree = "<group>"; };
 		8DF282952F3BE7F900D99775 /* Vec4.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vec4.hpp; sourceTree = "<group>"; };
+		8DF282972F3BE92800D99775 /* SpriteRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteRenderer.cpp; sourceTree = "<group>"; };
+		8DF282982F3BE92800D99775 /* SpriteRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SpriteRenderer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +156,8 @@
 				8DF282912F3BE7D600D99775 /* Sprite.cpp */,
 				8DF282922F3BE7D600D99775 /* Sprite.hpp */,
 				8DF282952F3BE7F900D99775 /* Vec4.hpp */,
+				8DF282972F3BE92800D99775 /* SpriteRenderer.cpp */,
+				8DF282982F3BE92800D99775 /* SpriteRenderer.hpp */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D17A5C32F2FEE8B003B7DC1 /* main.mm in Sources */,
+				8DF282992F3BE92800D99775 /* SpriteRenderer.cpp in Sources */,
 				8D17A5DB2F2FEF93003B7DC1 /* Engine.cpp in Sources */,
 				8D17A5DC2F2FEF93003B7DC1 /* math_utils.cpp in Sources */,
 				8DF2828F2F3BDEAB00D99775 /* Texture.cpp in Sources */,
