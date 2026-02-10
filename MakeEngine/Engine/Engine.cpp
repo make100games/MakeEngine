@@ -12,6 +12,7 @@
 #include <iostream>
 #include <utility>
 #include <unordered_map>
+#include "AsteroidBlasterLevel1.hpp"
 
 Engine::Engine() : myCanvasBounds(Bounds { 0, 1000, 0, 700 }) {
     objectsInSceneHaveChanged = false;
@@ -130,7 +131,8 @@ Bounds Engine::canvasBounds() {
 }
 
 void Engine::addScenes() {
-    scenes.push_back(std::make_unique<Level1>());
+    //scenes.push_back(std::make_unique<Level1>());
+    scenes.push_back(std::make_unique<AsteroidBlasterLevel1>());
 }
 
 void Engine::onKeyInput(KeyInput input) {

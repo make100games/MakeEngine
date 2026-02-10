@@ -24,6 +24,9 @@
 		8D70014A2F30004D0075F49D /* Paddle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D7001482F30004D0075F49D /* Paddle.cpp */; };
 		8DAAEC562F37D3EC0025DFE7 /* Hud.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DAAEC542F37D3EC0025DFE7 /* Hud.cpp */; };
 		8DC3169B2F314A440063D7B8 /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DC316992F314A440063D7B8 /* Ball.cpp */; };
+		8DF282892F3BD34400D99775 /* AsteroidBlasterLevel1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF282872F3BD34400D99775 /* AsteroidBlasterLevel1.cpp */; };
+		8DF2828C2F3BD40A00D99775 /* Rocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF2828A2F3BD40A00D99775 /* Rocket.cpp */; };
+		8DF2828F2F3BDEAB00D99775 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF2828D2F3BDEAB00D99775 /* Texture.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,6 +88,13 @@
 		8DAAEC552F37D3EC0025DFE7 /* Hud.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Hud.hpp; sourceTree = "<group>"; };
 		8DC316992F314A440063D7B8 /* Ball.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
 		8DC3169A2F314A440063D7B8 /* Ball.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
+		8DF282872F3BD34400D99775 /* AsteroidBlasterLevel1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AsteroidBlasterLevel1.cpp; sourceTree = "<group>"; };
+		8DF282882F3BD34400D99775 /* AsteroidBlasterLevel1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AsteroidBlasterLevel1.hpp; sourceTree = "<group>"; };
+		8DF2828A2F3BD40A00D99775 /* Rocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rocket.cpp; sourceTree = "<group>"; };
+		8DF2828B2F3BD40A00D99775 /* Rocket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Rocket.hpp; sourceTree = "<group>"; };
+		8DF2828D2F3BDEAB00D99775 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		8DF2828E2F3BDEAB00D99775 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
+		8DF282902F3BE46B00D99775 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +122,7 @@
 		8D17A5C92F2FEF93003B7DC1 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				8DF282902F3BE46B00D99775 /* stb_image.h */,
 				8D17A5CA2F2FEF93003B7DC1 /* Engine.hpp */,
 				8D17A5CB2F2FEF93003B7DC1 /* Collider.hpp */,
 				8D17A5CC2F2FEF93003B7DC1 /* math_utils.hpp */,
@@ -133,6 +144,8 @@
 				8D0545BB2F3157C300AEDDFC /* Logging.hpp */,
 				8D0E88112F33EC1E003797A4 /* RigidBody.hpp */,
 				8D0E88142F33F01E003797A4 /* Vec2.hpp */,
+				8DF2828D2F3BDEAB00D99775 /* Texture.cpp */,
+				8DF2828E2F3BDEAB00D99775 /* Texture.hpp */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -217,11 +230,39 @@
 		8D90DAAD2F2FEDD900BC93F7 /* MakeEngine */ = {
 			isa = PBXGroup;
 			children = (
+				8DF282842F3BD30800D99775 /* AsteroidBlaster */,
 				8D70013E2F2FF3930075F49D /* SoloPong */,
 				8D17A5C92F2FEF93003B7DC1 /* Engine */,
 				8D17A5C22F2FEE8B003B7DC1 /* main.mm */,
 			);
 			path = MakeEngine;
+			sourceTree = "<group>";
+		};
+		8DF282842F3BD30800D99775 /* AsteroidBlaster */ = {
+			isa = PBXGroup;
+			children = (
+				8DF282862F3BD32F00D99775 /* GameObjects */,
+				8DF282852F3BD32800D99775 /* Scenes */,
+			);
+			path = AsteroidBlaster;
+			sourceTree = "<group>";
+		};
+		8DF282852F3BD32800D99775 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				8DF282872F3BD34400D99775 /* AsteroidBlasterLevel1.cpp */,
+				8DF282882F3BD34400D99775 /* AsteroidBlasterLevel1.hpp */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		8DF282862F3BD32F00D99775 /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				8DF2828A2F3BD40A00D99775 /* Rocket.cpp */,
+				8DF2828B2F3BD40A00D99775 /* Rocket.hpp */,
+			);
+			path = GameObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +325,7 @@
 				8D17A5C32F2FEE8B003B7DC1 /* main.mm in Sources */,
 				8D17A5DB2F2FEF93003B7DC1 /* Engine.cpp in Sources */,
 				8D17A5DC2F2FEF93003B7DC1 /* math_utils.cpp in Sources */,
+				8DF2828F2F3BDEAB00D99775 /* Texture.cpp in Sources */,
 				8D17A5DA2F2FEF93003B7DC1 /* OpenGlRenderer.cpp in Sources */,
 				8D5C0DC72F353EB3005A9CBA /* Kudos.cpp in Sources */,
 				8DC3169B2F314A440063D7B8 /* Ball.cpp in Sources */,
@@ -292,6 +334,8 @@
 				8D17326C2F392B0D00310A9D /* Scene.cpp in Sources */,
 				8D7001472F2FF9F50075F49D /* Rectangle.cpp in Sources */,
 				8D0545BC2F3157C300AEDDFC /* Logging.cpp in Sources */,
+				8DF2828C2F3BD40A00D99775 /* Rocket.cpp in Sources */,
+				8DF282892F3BD34400D99775 /* AsteroidBlasterLevel1.cpp in Sources */,
 				8DAAEC562F37D3EC0025DFE7 /* Hud.cpp in Sources */,
 				8D5C0DCD2F35463F005A9CBA /* KudosManager.cpp in Sources */,
 				8D70014A2F30004D0075F49D /* Paddle.cpp in Sources */,
