@@ -11,13 +11,16 @@
 #include <stdio.h>
 #include <vector>
 #include "Sprite.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 class SpriteRenderer {
 public:
     SpriteRenderer();
     ~SpriteRenderer();
     
-    void render(const std::vector<Sprite*>& sprites, const float* projection);
+    void render(const std::vector<Sprite*>& sprites, const glm::mat4& projection);
     
 private:
     unsigned int quadVAO = 0;
