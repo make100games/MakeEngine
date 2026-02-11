@@ -8,8 +8,9 @@
 #define GL_SILENCE_DEPRECATION
 #include "SpriteRenderer.hpp"
 #include <OpenGL/gl3.h>
+#include <iostream>
 
-// TODO shader stuff. For starters I can just declare the here and compile them...
+// TODO Shader should be pulled out of this class and into a separate class
 static const char* vertextShaderSource = R"(
 #version 330 core
 
@@ -49,7 +50,51 @@ SpriteRenderer::SpriteRenderer() {
 }
 
 void SpriteRenderer::initShaders() {
-    // TODO
+    // Compile the vertex shader
+    unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertextShaderSource, nullptr);
+    glCompileShader(vertexShader);
+    
+    // Check vertex shader compilation
+    int success;
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+    if (!success) {
+        char infoLog[512];
+        glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
+        std::cerr << "Vertex Shader Compilation failed: \n" << infoLog << std::endl;
+    }
+    
+    // Compile fragment shader
+    unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
+    glCompileShader(fragmentShader);
+    
+    // Check fragment shader compilation
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+    if (!success) {
+        char infoLog[512];
+        glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
+        std::cerr << "Fragment Shader Compilation Failed:\n" << infoLog << std::endl;
+    }
+    
+    // Link shaders into a program
+    shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glBindAttribLocation(shaderProgram, 0, "position"); // Bind 'position' to location 0
+    glLinkProgram(shaderProgram);
+    
+    // Check linking
+    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+    if (!success) {
+        char infoLog[512];
+        glGetProgramInfoLog(shaderProgram, 512, nullptr, infoLog);
+        std::cerr << "Shader Program Linking Failed:\n" << infoLog << std::endl;
+    }
+    
+    // Delete shaders as they are now linked
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
 }
 
 void SpriteRenderer::initQuad() {
@@ -90,7 +135,10 @@ void SpriteRenderer::initQuad() {
 }
 
 void SpriteRenderer::render(const std::vector<Sprite *> &sprites, const glm::mat4& projection) {
-    // TODO use the shaders. See OpenGLRenderer on how to do that
+    glUseProgram(shaderProgram);
+    GLint modelLocation = glGetUniformLocation(shaderProgram, "uModel");
+    GLint colorLocation = glGetUniformLocation(shaderProgram, "uColor");
+    GLint textureLocation = glGetUniformLocation(shaderProgram, "uTexture");
     
     glBindVertexArray(quadVAO);
     
@@ -103,13 +151,18 @@ void SpriteRenderer::render(const std::vector<Sprite *> &sprites, const glm::mat
         model = glm::rotate(model, sprite -> rotation, glm::vec3(0, 0, 1));
         model = glm::scale(model, glm::vec3(sprite -> scale.x, sprite -> scale.y, 1.0));
         
-        // TODO pass values to shader
-        // spriteShader.setMat4("uModel", model);
-        // spriteShader.setVec4("uColor", sprite -> color);
+        // Pass values to shader
+        glUniformMatrix4fv(
+            modelLocation,
+            1,              // number of matrices
+            GL_FALSE,       // transpose?
+            glm::value_ptr(model)
+        );
+        glUniform4f(colorLocation, sprite -> color.r, sprite -> color.g, sprite -> color.b, sprite -> color.a);
         
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, sprite -> texture -> id());
-        // spriteShader.setInt("uTexture", 0);
+        glUniform1i(textureLocation, 0);    // We sample from texture in texture slot 0 (since we activated GL_TEXTURE0 above)
         
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     }

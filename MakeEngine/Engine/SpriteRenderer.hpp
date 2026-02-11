@@ -26,6 +26,7 @@ private:
     unsigned int quadVAO = 0;
     unsigned int quadVBO = 0;
     unsigned int quadEBO = 0;
+    unsigned int shaderProgram;
     
     void initShaders();
     void initQuad();
