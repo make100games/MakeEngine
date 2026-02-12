@@ -63,6 +63,9 @@ void Engine::update() {
     if(currentScene) {
         currentScene -> update(deltaTime);
         auto& gameObjects = currentScene -> gameObjects();
+        
+        // TODO: We should refactor this so that the engine can just call something like renderer -> render(renderables) and all is taken care of polymporphically somehow. But something for another day...
+        // Render all of the shape renderables
         std::unordered_map<std::string, std::pair<Transform, std::vector<Renderable*>>> renderObjects;
         for (auto& go : gameObjects) {
             auto transform = go -> transform();
@@ -74,6 +77,16 @@ void Engine::update() {
         }
         // There is probably a much more efficient way to do all this but I wanted to make sure that I had as few draw calls as possible in the renderer and to do that I batched Renderables that share the same tag into one draw call. Bridging this with the GameObject API (and avoiding having to expose too many of the implementation details of the Renderer to the GameObjects) I have to bring all this together here.
         renderer -> renderFrame(renderObjects);
+        
+        // Render all the sprites
+        std::vector<std::pair<Renderable*, Transform>> sprites;
+        for (auto& go : gameObjects) {
+            auto transform = go -> transform();
+            auto& renderable = go -> renderable();
+            sprites.push_back(std::make_pair(renderable.get(), transform));
+        }
+        renderer -> render(sprites);
+        
         checkForCollisions(gameObjects);
         currentScene -> processPendingRemovals();
         currentScene -> processPendingAdditions();
