@@ -149,7 +149,7 @@ void SpriteRenderer::initialize(Bounds canvasBounds) {
     glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 }
 
-void SpriteRenderer::render(const std::vector<std::pair<Sprite*, Transform>>& sprites) {
+void SpriteRenderer::render(const std::vector<std::pair<Renderable*, Transform>>& sprites) {
     glUseProgram(shaderProgram);
     GLint modelLocation = glGetUniformLocation(shaderProgram, "uModel");
     GLint colorLocation = glGetUniformLocation(shaderProgram, "uColor");
@@ -157,7 +157,7 @@ void SpriteRenderer::render(const std::vector<std::pair<Sprite*, Transform>>& sp
     
     glBindVertexArray(quadVAO);
     
-    for(const std::pair<Sprite*, Transform> &sprite : sprites) {
+    for(const std::pair<Renderable*, Transform> &sprite : sprites) {
         if(!sprite.first || !sprite.first -> texture) continue;
         
         glm::mat4 model(1.0f);
@@ -172,7 +172,7 @@ void SpriteRenderer::render(const std::vector<std::pair<Sprite*, Transform>>& sp
             GL_FALSE,       // transpose?
             glm::value_ptr(model)
         );
-        glUniform4f(colorLocation, sprite.first -> color.r, sprite.first -> color.g, sprite.first -> color.b, sprite.first -> color.a);
+        glUniform4f(colorLocation, sprite.first -> color().r, sprite.first -> color().g, sprite.first -> color().b, sprite.first -> color().a);
         
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, sprite.first -> texture -> id());

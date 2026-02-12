@@ -10,7 +10,7 @@
 
 static const std::string tag = "Kudos";
 
-Kudos::Kudos(float positionX, float positionY, Vec3 color): myTransform({.renderTag = tag}) {
+Kudos::Kudos(float positionX, float positionY, Vec4 color): myTransform({.renderTag = tag}) {
     this -> positionX = positionX;
     this -> positionY = positionY;
     auto top = positionY;

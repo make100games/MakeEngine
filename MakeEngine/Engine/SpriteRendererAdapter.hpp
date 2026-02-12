@@ -18,6 +18,7 @@
 #include "Sprite.hpp"
 #include "Renderer.hpp"
 #include "SpriteRenderer.hpp"
+#include "Renderable.hpp"
 
 /**
  Adapts the Renderer interface to the SpriteRenderer.
@@ -30,7 +31,7 @@ public:
     void initialize(Bounds canvasBounds) override;
     void addToScene(const std::unordered_map<std::string, std::vector<Renderable*>> renderBuckets) override;
     void renderFrame(const std::unordered_map<std::string, std::pair<Transform, std::vector<Renderable*>>> renderObjects) override;
-    void render(const std::vector<std::pair<Sprite*, Transform>>& sprites) override;
+    void render(const std::vector<std::pair<Renderable*, Transform>>& sprites) override;
 private:
     std::unique_ptr<SpriteRenderer> spriteRenderer;
 };

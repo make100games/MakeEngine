@@ -21,10 +21,11 @@
 #include "Vec3.hpp"
 #include <vector>
 #include "GameManager.hpp"
+#include "Vec4.hpp"
 
 class GameOverScreen : public GameObject {
 public:
-    GameOverScreen(Vec3 color, GameManager* gameManager);
+    GameOverScreen(Vec4 color, GameManager* gameManager);
     ~GameOverScreen();
     
     void initialize() override;
@@ -46,7 +47,7 @@ public:
     void onKeyInput(KeyInput input) override;
     
 private:
-    Vec3 myColor;
+    Vec4 myColor;
     std::unique_ptr<Renderable> myRenderable;
     Transform myTransform;
     RigidBody myRigidBody;

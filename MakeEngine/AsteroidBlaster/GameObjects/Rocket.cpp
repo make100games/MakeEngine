@@ -19,7 +19,7 @@ Rocket::Rocket() {
         100.0f, 200.0f,
         0.0f, 200.0f
     };
-    Vec3 color = Vec3 { 1.0f, 0.0f, 0.0f };
+    Vec4 color = Vec4 { 1.0f, 0.0f, 0.0f, 1.0f };
     myRenderable = std::make_unique<Rectangle>(vertices, color, "Rocket");
 }
 

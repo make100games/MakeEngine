@@ -11,11 +11,11 @@
 #include <stdio.h>
 #include "Kudos.hpp"
 #include <memory>
-#include "Vec3.hpp"
+#include "Vec4.hpp"
 
 class KudosManagerListener {
 public:
-    virtual void onStartedNewLevel(Vec3 color, int maxKudosInLevel) = 0;
+    virtual void onStartedNewLevel(Vec4 color, int maxKudosInLevel) = 0;
     
     virtual void onKudosEarned() = 0;
     

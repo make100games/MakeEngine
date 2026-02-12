@@ -35,7 +35,7 @@ Ball::Ball(KudosManager* kudosManager, GameManager* gameManager):myTransform({.r
         left + size, top,
         left + size, top + size
     };
-    Vec3 color = { 1.0f, 1.0f, 1.0f };
+    Vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
     myRenderable = std::make_unique<Rectangle>(vertices, color, tag);
 }
 

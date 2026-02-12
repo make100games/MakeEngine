@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include "KudosManagerListener.hpp"
 #include <vector>
-#include "Vec3.hpp"
+#include "Vec4.hpp"
 #include <iostream>
 #include "GameManager.hpp"
 
@@ -34,8 +34,8 @@ private:
     KudosManagerListener* myListener;
     int numberOfKudos = 0;
     int currentLevel = 0;
-    std::vector<Vec3> levelColors;
-    Vec3 currentKudosColor;
+    std::vector<Vec4> levelColors;
+    Vec4 currentKudosColor;
     GameManager* myGameManager;
     
     void resetGame();

@@ -17,6 +17,7 @@
 #include "Transform.hpp"
 #include <memory>
 #include <utility>
+#include "Renderable.hpp"
 
 class SpriteRenderer {
 public:
@@ -24,7 +25,7 @@ public:
     ~SpriteRenderer();
     
     void initialize(Bounds canvasBounds);
-    void render(const std::vector<std::pair<Sprite*, Transform>>& sprites);
+    void render(const std::vector<std::pair<Renderable*, Transform>>& sprites);
     
 private:
     unsigned int quadVAO = 0;

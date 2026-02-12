@@ -21,6 +21,7 @@
 #include "math_utils.hpp"
 #include "KudosManager.hpp"
 #include "GameManager.hpp"
+#include "Vec4.hpp"
 
 class Ball : public GameObject {
 public:

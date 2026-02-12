@@ -19,6 +19,7 @@
 #include "RigidBody.hpp"
 #include "Vec2.hpp"
 #include "Vec3.hpp"
+#include "Vec4.hpp"
 
 /**
  You receive Kudos each time you successfully knock the ball back to the other side. Each time the ball hits the top or bottom of the window, you lose kudos.
@@ -26,7 +27,7 @@
  */
 class Kudos : public GameObject {
 public:
-    Kudos(float positionX, float positionY, Vec3 color);
+    Kudos(float positionX, float positionY, Vec4 color);
     ~Kudos();
     
     float getPositionX();

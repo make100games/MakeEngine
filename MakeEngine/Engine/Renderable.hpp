@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include "Vec3.hpp"
+#include "Vec4.hpp"
 #include "Texture.hpp"
 
 // Note: Right now the Renderable interface is implemented by simple shape Renderables such as Rectangles that just provide vertices and a color and Sprite which provide a Texture and a color. This is clunky use of OOP and polymorphism. Instead, we should think about having the Renderable draw itself so the Renderer can just call renderable.draw and everything will render correctly. This would allow you to render sprites and shapes side by side. But that's something for the future. I don't want to refactor too much while building out the engine. Also not sure if the shape renderable will have much of a future yet...
@@ -33,7 +33,7 @@ public:
     /**
      The color of the renderable.
      */
-    virtual const Vec3& color() const = 0;
+    virtual const Vec4& color() const = 0;
     
     /**
      A tag that indicates in what context this renderable should be rendered. Renderables with the same tag will be rendered together, translated

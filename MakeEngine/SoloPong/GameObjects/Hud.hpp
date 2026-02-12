@@ -20,6 +20,7 @@
 #include "Vec2.hpp"
 #include "Vec3.hpp"
 #include <vector>
+#include "Vec4.hpp"
 
 class Hud : public GameObject {
 public:

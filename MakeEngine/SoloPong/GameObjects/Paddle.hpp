@@ -18,6 +18,7 @@
 #include "KeyInput.hpp"
 #include "RigidBody.hpp"
 #include "GameManager.hpp"
+#include "Vec4.hpp"
 
 class Paddle : public GameObject {
 public:

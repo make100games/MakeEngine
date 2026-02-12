@@ -43,7 +43,7 @@ void Hud::onCanvasBoundsChanged(Bounds bounds) {
     myBounds = bounds;
     float left = 0.0f;
     float top = bounds.bottom - Constants::HudHeight;
-    Vec3 color = Vec3 { 0.3f, 0.3f, 0.3f };
+    Vec4 color = Vec4 { 0.3f, 0.3f, 0.3f, 1.0f };
     std::vector<float> vertices = std::vector<float> {
         // Triangle 1
         left, top,

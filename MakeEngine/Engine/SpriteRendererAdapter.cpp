@@ -27,6 +27,6 @@ void SpriteRendererAdapter::renderFrame(const std::unordered_map<std::string, st
     // No op. Not relevant for sprite renderer
 }
 
-void SpriteRendererAdapter::render(const std::vector<std::pair<Sprite *, Transform>> &sprites) {
+void SpriteRendererAdapter::render(const std::vector<std::pair<Renderable *, Transform>> &sprites) {
     spriteRenderer -> render(sprites);
 }

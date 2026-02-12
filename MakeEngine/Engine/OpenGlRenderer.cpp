@@ -189,7 +189,7 @@ void OpenGlRenderer::renderFrame(const std::unordered_map<std::string, std::pair
         // Apply the color from the renderable
         auto renderable = renderBucket.second[0];
         glUseProgram(shaderProgram);    // Don't think I need this since I'm already doing it at the top
-        glUniform3f(colorLocation, renderable -> color().x, renderable -> color().y, renderable -> color().z);
+        glUniform3f(colorLocation, renderable -> color().r, renderable -> color().g, renderable -> color().b);
         
         // FIXME: 6 is hardcoded. 6 refers to the number of vertices to draw a rectangle. This is ugly! This should retrieve the size of the vertex array from the Renderable. Looks like a tomorrow problem to me...
         int numberOfVerticesInRectangle = 6;
@@ -200,6 +200,6 @@ void OpenGlRenderer::renderFrame(const std::unordered_map<std::string, std::pair
     glBindVertexArray(0);
 }
 
-void OpenGlRenderer::render(const std::vector<std::pair<Sprite *, Transform>> &sprites) {
+void OpenGlRenderer::render(const std::vector<std::pair<Renderable *, Transform>> &sprites) {
     
 }

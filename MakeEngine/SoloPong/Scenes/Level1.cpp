@@ -51,7 +51,7 @@ void Level1::addSceneListener(SceneListener *listener) {
     this -> sceneListener = listener;
 }
 
-void Level1::onStartedNewLevel(Vec3 color, int maxKudosInLevel) {
+void Level1::onStartedNewLevel(Vec4 color, int maxKudosInLevel) {
     std::cout << "Started new level\n";
     currentKudosColor = color;
     kudosTop = hudTop + (Constants::HudHeight / 2) - (Kudos::Size / 2);
@@ -103,7 +103,7 @@ void Level1::onKudosLost() {
 
 void Level1::onGameWon() {
     std::cout << "You beat the game!\n";
-    std::unique_ptr<GameOverScreen> gameOverScreen = std::make_unique<GameOverScreen>(Vec3 {0.0f, 1.0f, 0.0}, myGameManager.get());
+    std::unique_ptr<GameOverScreen> gameOverScreen = std::make_unique<GameOverScreen>(Vec4 {0.0f, 1.0f, 0.0, 1.0f}, myGameManager.get());
     myGameOverScreen = gameOverScreen.get();
     requestAdd(std::move(gameOverScreen));
     if(myBall != nullptr) {
@@ -116,7 +116,7 @@ void Level1::onGameWon() {
 }
 
 void Level1::onGameLost() {
-    std::unique_ptr<GameOverScreen> gameOverScreen = std::make_unique<GameOverScreen>(Vec3 {1.0f, 0.0f, 0.0}, myGameManager.get());
+    std::unique_ptr<GameOverScreen> gameOverScreen = std::make_unique<GameOverScreen>(Vec4 {1.0f, 0.0f, 0.0, 1.0f}, myGameManager.get());
     myGameOverScreen = gameOverScreen.get();
     requestAdd(std::move(gameOverScreen));
     if(myBall != nullptr) {

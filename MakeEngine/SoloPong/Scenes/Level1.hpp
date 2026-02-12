@@ -22,6 +22,7 @@
 #include "Ball.hpp"
 #include "Paddle.hpp"
 #include "GameOverScreen.hpp"
+#include "Vec4.hpp"
 
 class Level1 : public Scene, KudosManagerListener, GameManagerListener {
 public:
@@ -35,7 +36,7 @@ public:
     void addSceneListener(SceneListener* listener) override;
     
     // Methods from KudosManagerListener
-    void onStartedNewLevel(Vec3 color, int maxKudosInLevel) override;
+    void onStartedNewLevel(Vec4 color, int maxKudosInLevel) override;
     
     void onKudosEarned() override;
     
@@ -61,7 +62,7 @@ private:
     float hudTop;
     float kudosTop;
     float spaceBetweenKudos = 0;
-    Vec3 currentKudosColor;
+    Vec4 currentKudosColor;
     
     Ball* myBall;
     Paddle* myPaddle;

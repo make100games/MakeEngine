@@ -11,7 +11,7 @@
 
 static const std::string tag = "GameOverScreen";
 
-GameOverScreen::GameOverScreen(Vec3 color, GameManager* gameManager):myColor(color), myGameManager(gameManager) {
+GameOverScreen::GameOverScreen(Vec4 color, GameManager* gameManager):myColor(color), myGameManager(gameManager) {
 }
 
 GameOverScreen::~GameOverScreen() {

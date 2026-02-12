@@ -12,22 +12,22 @@
 #include "Renderable.hpp"
 #include <string>
 #include <vector>
-#include "Vec3.hpp"
+#include "Vec4.hpp"
 
 class Rectangle : public Renderable {
 public:
-    Rectangle(std::vector<float> vertices, Vec3 color, std::string renderTag);
+    Rectangle(std::vector<float> vertices, Vec4 color, std::string renderTag);
     ~Rectangle();
     
     const std::vector<float>* vertices() const override;
     
-    const Vec3& color() const override;
+    const Vec4& color() const override;
     
     std::string renderTag() override;
     
 private:
     std::vector<float> myVertices;
-    Vec3 myColor;
+    Vec4 myColor;
     std::string myRenderTag;
 };
 

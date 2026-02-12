@@ -29,7 +29,7 @@ public:
      */
     virtual void addToScene(const std::unordered_map<std::string, std::vector<Renderable*>> renderBuckets) = 0;
     virtual void renderFrame(const std::unordered_map<std::string, std::pair<Transform, std::vector<Renderable*>>> renderObjects) = 0;
-    virtual void render(const std::vector<std::pair<Sprite*, Transform>>& sprites) = 0;
+    virtual void render(const std::vector<std::pair<Renderable*, Transform>>& sprites) = 0;
 };
 
 #endif /* Renderer_hpp */
