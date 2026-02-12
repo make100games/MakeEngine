@@ -12,16 +12,23 @@
 #include <string>
 #include <vector>
 #include "Vec3.hpp"
+#include "Texture.hpp"
 
+// Note: Right now the Renderable interface is implemented by simple shape Renderables such as Rectangles that just provide vertices and a color and Sprite which provide a Texture and a color. This is clunky use of OOP and polymorphism. Instead, we should think about having the Renderable draw itself so the Renderer can just call renderable.draw and everything will render correctly. This would allow you to render sprites and shapes side by side. But that's something for the future. I don't want to refactor too much while building out the engine. Also not sure if the shape renderable will have much of a future yet...
 class Renderable {
 public:
     virtual ~Renderable() = default;
     
     /**
+     A texture to be rendered. The texture is not owned by the Renderable but by the Renderer.
+     */
+    Texture* texture = nullptr;
+    
+    /**
      The vertices that make up the geometry that is to be rendered. Returning a reference because we don't want to copy potentially
      large numbers of vertices each time this method is called.
      */
-    virtual const std::vector<float>& vertices() = 0;
+    virtual const std::vector<float>* vertices() const { return nullptr; }
     
     /**
      The color of the renderable.
@@ -37,7 +44,7 @@ public:
      different locations, do so not by providing a value to the transform but by baking the position straight into the vertices of the Renderable. The transform can
      be used to translate all of the Bricks at once (e.g. to create a moving wall, for example).
      */
-    virtual std::string renderTag() = 0;
+    virtual std::string renderTag() { return ""; }
     
     // TODO: return the color as well
 };

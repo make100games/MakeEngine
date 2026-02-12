@@ -92,8 +92,11 @@ void OpenGlRenderer::setupGeometry(std::string renderTag, std::vector<Renderable
     // Collect the vertices of all Renderables in this list of Renderables
     std::vector<float> allVertices;
     for (auto& renderable : renderables) {
-        std::vector<float> renderableVertices = renderable -> vertices();
-        allVertices.insert(allVertices.end(), renderableVertices.begin(), renderableVertices.end());
+        // Gotta check for null vertices because sprites do not provide vertices
+        if (auto verts = renderable -> vertices()) {
+            auto& renderableVertices = *verts; // safe dereference
+            allVertices.insert(allVertices.end(), renderableVertices.begin(), renderableVertices.end());
+        }
     }
     float* vertices = allVertices.data();
     

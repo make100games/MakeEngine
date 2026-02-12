@@ -19,7 +19,7 @@ public:
     Rectangle(std::vector<float> vertices, Vec3 color, std::string renderTag);
     ~Rectangle();
     
-    const std::vector<float>& vertices() override;
+    const std::vector<float>* vertices() const override;
     
     const Vec3& color() const override;
     

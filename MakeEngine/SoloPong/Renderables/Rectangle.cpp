@@ -14,8 +14,8 @@ Rectangle::~Rectangle() {
     
 }
 
-const std::vector<float>& Rectangle::vertices() {
-    return myVertices;
+const std::vector<float>* Rectangle::vertices() const {
+    return &myVertices;
 }
 
 const Vec3& Rectangle::color() const {
