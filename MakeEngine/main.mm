@@ -12,6 +12,9 @@
 #include <vector>
 #include "Engine.hpp"
 #include "KeyInput.hpp"
+#include <iostream>
+#include <unistd.h>
+#include <limits.h>
 
 void runApp() {
     @autoreleasepool {
@@ -121,5 +124,11 @@ void runApp() {
 
 int main(int argc, const char * argv[]) {
     runApp();
+    
+    // Print working dir
+    /*char cwd[PATH_MAX];
+    if(getcwd(cwd, sizeof(cwd)) != nullptr) {
+        std::cout << "Current working dir: " << cwd << std::endl;
+    }*/
     return 0;
 }

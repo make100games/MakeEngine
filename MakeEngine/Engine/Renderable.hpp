@@ -45,8 +45,6 @@ public:
      be used to translate all of the Bricks at once (e.g. to create a moving wall, for example).
      */
     virtual std::string renderTag() { return ""; }
-    
-    // TODO: return the color as well
 };
 
 #endif /* Renderable_hpp */

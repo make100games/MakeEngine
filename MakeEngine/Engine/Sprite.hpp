@@ -20,7 +20,11 @@ public:
         texture = tex;
     }
     
-    Vec4 color { 1.0f, 1.0f, 1.0f, 1.0f };
+    Vec4 _color { 1.0f, 1.0f, 1.0f, 1.0f };
+    
+    const Vec4& color() const override {
+        return _color;
+    }
     
     // TODO: add sprite sheet/atlas support later for animating sprites
 };

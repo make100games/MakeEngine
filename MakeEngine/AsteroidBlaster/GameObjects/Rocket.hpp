@@ -20,6 +20,7 @@
 #include "RigidBody.hpp"
 #include "GameManager.hpp"
 #include "Vec4.hpp"
+#include "Texture.hpp"
 
 class Rocket : public GameObject {
 public:
@@ -45,6 +46,7 @@ public:
     void onKeyInput(KeyInput keyInput) override;
     
 private:
+    std::unique_ptr<Texture> spriteTexture;
     std::unique_ptr<Renderable> myRenderable;
     Transform myTransform;
     Bounds myCanvasBounds;

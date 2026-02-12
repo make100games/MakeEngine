@@ -7,20 +7,11 @@
 
 #include "Rocket.hpp"
 #include "Rectangle.hpp"
+#include "Sprite.hpp"
 
 Rocket::Rocket() {
-    std::vector<float> vertices = {
-        // Tri 1
-        0.0f, 0.0f,
-        100.0f, 0.0f,
-        100.0f, 200.0f,
-        // Tri 2
-        0.0f, 0.0f,
-        100.0f, 200.0f,
-        0.0f, 200.0f
-    };
-    Vec4 color = Vec4 { 1.0f, 0.0f, 0.0f, 1.0f };
-    myRenderable = std::make_unique<Rectangle>(vertices, color, "Rocket");
+    spriteTexture = std::make_unique<Texture>("MakeEngine/AsteroidBlaster/Assets/Rocket.png");
+    myRenderable = std::make_unique<Sprite>(spriteTexture.get());
 }
 
 Rocket::~Rocket() {

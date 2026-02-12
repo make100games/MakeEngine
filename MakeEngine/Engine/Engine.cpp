@@ -13,11 +13,12 @@
 #include <utility>
 #include <unordered_map>
 #include "AsteroidBlasterLevel1.hpp"
+#include "SpriteRendererAdapter.hpp"
 
 Engine::Engine() : myCanvasBounds(Bounds { 0, 1000, 0, 700 }) {
     objectsInSceneHaveChanged = false;
     lastTime = std::chrono::high_resolution_clock::now();
-    renderer = std::make_unique<OpenGlRenderer>();
+    renderer = std::make_unique<SpriteRendererAdapter>();
     scenes = std::vector<std::unique_ptr<Scene>>();
 }
 

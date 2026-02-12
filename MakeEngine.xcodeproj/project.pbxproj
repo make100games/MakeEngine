@@ -74,6 +74,7 @@
 		8D17A5D72F2FEF93003B7DC1 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
 		8D17A5D82F2FEF93003B7DC1 /* math_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = math_utils.cpp; sourceTree = "<group>"; };
 		8D17A5D92F2FEF93003B7DC1 /* Scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
+		8D2C98A72F3E526C002A047D /* Rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rocket.png; sourceTree = "<group>"; };
 		8D488F0D2F3A8D1E0029BFD7 /* GameOverScreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverScreen.cpp; sourceTree = "<group>"; };
 		8D488F0E2F3A8D1E0029BFD7 /* GameOverScreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameOverScreen.hpp; sourceTree = "<group>"; };
 		8D5C0DC52F353EB3005A9CBA /* Kudos.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Kudos.cpp; sourceTree = "<group>"; };
@@ -596,6 +597,14 @@
 				8D0CAE072F3DB89500BC41B3 /* SpriteRendererAdapter.hpp */,
 			);
 			path = Engine;
+			sourceTree = "<group>";
+		};
+		8D2C98A62F3E526C002A047D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				8D2C98A72F3E526C002A047D /* Rocket.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		8D5C0DCE2F354663005A9CBA /* Managers */ = {
@@ -1168,6 +1177,7 @@
 		8DF282842F3BD30800D99775 /* AsteroidBlaster */ = {
 			isa = PBXGroup;
 			children = (
+				8D2C98A62F3E526C002A047D /* Assets */,
 				8DF282862F3BD32F00D99775 /* GameObjects */,
 				8DF282852F3BD32800D99775 /* Scenes */,
 			);
