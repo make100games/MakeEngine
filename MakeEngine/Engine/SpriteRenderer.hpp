@@ -24,7 +24,7 @@ public:
     ~SpriteRenderer();
     
     void initialize(Bounds canvasBounds);
-    void render(const std::vector<std::pair<Sprite*, Transform>>& sprites, const glm::mat4& projection);
+    void render(const std::vector<std::pair<Sprite*, Transform>>& sprites);
     
 private:
     unsigned int quadVAO = 0;

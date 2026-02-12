@@ -199,3 +199,7 @@ void OpenGlRenderer::renderFrame(const std::unordered_map<std::string, std::pair
     
     glBindVertexArray(0);
 }
+
+void OpenGlRenderer::render(const std::vector<std::pair<Sprite *, Transform>> &sprites) {
+    
+}

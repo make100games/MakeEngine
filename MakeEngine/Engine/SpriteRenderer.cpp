@@ -49,6 +49,10 @@ SpriteRenderer::SpriteRenderer() {
     initQuad();
 }
 
+SpriteRenderer::~SpriteRenderer() {
+    
+}
+
 void SpriteRenderer::initShaders() {
     // Compile the vertex shader
     unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -145,7 +149,7 @@ void SpriteRenderer::initialize(Bounds canvasBounds) {
     glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 }
 
-void SpriteRenderer::render(const std::vector<std::pair<Sprite*, Transform>>& sprites, const glm::mat4& projection) {
+void SpriteRenderer::render(const std::vector<std::pair<Sprite*, Transform>>& sprites) {
     glUseProgram(shaderProgram);
     GLint modelLocation = glGetUniformLocation(shaderProgram, "uModel");
     GLint colorLocation = glGetUniformLocation(shaderProgram, "uColor");

@@ -17,6 +17,7 @@
 #include "Bounds.hpp"
 #include <unordered_map>
 #include <utility>
+#include "Sprite.hpp"
 
 struct RenderingContext {
     // TODO: change these from unsigned int to GLuint
@@ -32,6 +33,7 @@ public:
     void initialize(Bounds canvasBounds) override;
     void addToScene(const std::unordered_map<std::string, std::vector<Renderable*>> renderBuckets) override;
     void renderFrame(const std::unordered_map<std::string, std::pair<Transform, std::vector<Renderable*>>> renderObjects) override;
+    void render(const std::vector<std::pair<Sprite*, Transform>>& sprites) override;
 private:
     // The key of the hashmap is the rendering tag of a Renderable or Transform (those 2 renderingTags MUST BE IDENTICAL! I'm not super happy with this design but it's ok as a first step.
     std::unordered_map<std::string, RenderingContext> renderingContexts;

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D0545BC2F3157C300AEDDFC /* Logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D0545BA2F3157C300AEDDFC /* Logging.cpp */; };
+		8D0CAE082F3DB89500BC41B3 /* SpriteRendererAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CAE062F3DB89500BC41B3 /* SpriteRendererAdapter.cpp */; };
 		8D17326C2F392B0D00310A9D /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17326B2F392B0D00310A9D /* Scene.cpp */; };
 		8D17326F2F39403200310A9D /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17326D2F39403200310A9D /* GameManager.cpp */; };
 		8D17A5C32F2FEE8B003B7DC1 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D17A5C22F2FEE8B003B7DC1 /* main.mm */; };
@@ -46,6 +47,8 @@
 /* Begin PBXFileReference section */
 		8D0545BA2F3157C300AEDDFC /* Logging.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logging.cpp; sourceTree = "<group>"; };
 		8D0545BB2F3157C300AEDDFC /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
+		8D0CAE062F3DB89500BC41B3 /* SpriteRendererAdapter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteRendererAdapter.cpp; sourceTree = "<group>"; };
+		8D0CAE072F3DB89500BC41B3 /* SpriteRendererAdapter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SpriteRendererAdapter.hpp; sourceTree = "<group>"; };
 		8D0E88112F33EC1E003797A4 /* RigidBody.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RigidBody.hpp; sourceTree = "<group>"; };
 		8D0E88142F33F01E003797A4 /* Vec2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vec2.hpp; sourceTree = "<group>"; };
 		8D17326B2F392B0D00310A9D /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
@@ -589,6 +592,8 @@
 				8DF282952F3BE7F900D99775 /* Vec4.hpp */,
 				8DF282972F3BE92800D99775 /* SpriteRenderer.cpp */,
 				8DF282982F3BE92800D99775 /* SpriteRenderer.hpp */,
+				8D0CAE062F3DB89500BC41B3 /* SpriteRendererAdapter.cpp */,
+				8D0CAE072F3DB89500BC41B3 /* SpriteRendererAdapter.hpp */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -1251,6 +1256,7 @@
 				8D17A5DC2F2FEF93003B7DC1 /* math_utils.cpp in Sources */,
 				8DF2828F2F3BDEAB00D99775 /* Texture.cpp in Sources */,
 				8D17A5DA2F2FEF93003B7DC1 /* OpenGlRenderer.cpp in Sources */,
+				8D0CAE082F3DB89500BC41B3 /* SpriteRendererAdapter.cpp in Sources */,
 				8D5C0DC72F353EB3005A9CBA /* Kudos.cpp in Sources */,
 				8DC3169B2F314A440063D7B8 /* Ball.cpp in Sources */,
 				8D7001442F2FF3C50075F49D /* Level1.cpp in Sources */,
