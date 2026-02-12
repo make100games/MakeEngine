@@ -14,6 +14,9 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 #include "Bounds.hpp"
+#include "Transform.hpp"
+#include <memory>
+#include <utility>
 
 class SpriteRenderer {
 public:
@@ -21,7 +24,7 @@ public:
     ~SpriteRenderer();
     
     void initialize(Bounds canvasBounds);
-    void render(const std::vector<Sprite*>& sprites, const glm::mat4& projection);
+    void render(const std::vector<std::pair<Sprite*, Transform>>& sprites, const glm::mat4& projection);
     
 private:
     unsigned int quadVAO = 0;

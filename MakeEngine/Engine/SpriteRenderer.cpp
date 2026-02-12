@@ -145,7 +145,7 @@ void SpriteRenderer::initialize(Bounds canvasBounds) {
     glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 }
 
-void SpriteRenderer::render(const std::vector<Sprite *> &sprites, const glm::mat4& projection) {
+void SpriteRenderer::render(const std::vector<std::pair<Sprite*, Transform>>& sprites, const glm::mat4& projection) {
     glUseProgram(shaderProgram);
     GLint modelLocation = glGetUniformLocation(shaderProgram, "uModel");
     GLint colorLocation = glGetUniformLocation(shaderProgram, "uColor");
@@ -153,13 +153,13 @@ void SpriteRenderer::render(const std::vector<Sprite *> &sprites, const glm::mat
     
     glBindVertexArray(quadVAO);
     
-    for(const Sprite* sprite : sprites) {
-        if(!sprite || !sprite -> texture) continue;
+    for(const std::pair<Sprite*, Transform> &sprite : sprites) {
+        if(!sprite.first || !sprite.first -> texture) continue;
         
         glm::mat4 model(1.0f);
-        model = glm::translate(model, glm::vec3(sprite -> position.x, sprite -> position.y, 0.0f));
-        model = glm::rotate(model, sprite -> rotation, glm::vec3(0, 0, 1));
-        model = glm::scale(model, glm::vec3(sprite -> scale.x, sprite -> scale.y, 1.0));
+        model = glm::translate(model, glm::vec3(sprite.second.position.x, sprite.second.position.y, 0.0f));
+        model = glm::rotate(model, sprite.second.rotation.z, glm::vec3(0, 0, 1));
+        model = glm::scale(model, glm::vec3(sprite.second.scale.x, sprite.second.scale.y, 1.0));
         
         // Pass values to shader
         glUniformMatrix4fv(
@@ -168,10 +168,10 @@ void SpriteRenderer::render(const std::vector<Sprite *> &sprites, const glm::mat
             GL_FALSE,       // transpose?
             glm::value_ptr(model)
         );
-        glUniform4f(colorLocation, sprite -> color.r, sprite -> color.g, sprite -> color.b, sprite -> color.a);
+        glUniform4f(colorLocation, sprite.first -> color.r, sprite.first -> color.g, sprite.first -> color.b, sprite.first -> color.a);
         
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, sprite -> texture -> id());
+        glBindTexture(GL_TEXTURE_2D, sprite.first -> texture -> id());
         glUniform1i(textureLocation, 0);    // We sample from texture in texture slot 0 (since we activated GL_TEXTURE0 above)
         
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
