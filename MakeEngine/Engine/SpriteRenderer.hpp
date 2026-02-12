@@ -7,7 +7,6 @@
 
 #ifndef SpriteRenderer_hpp
 #define SpriteRenderer_hpp
-
 #include <stdio.h>
 #include <vector>
 #include "Sprite.hpp"
