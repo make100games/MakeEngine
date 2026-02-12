@@ -14,12 +14,14 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "Bounds.hpp"
 
 class SpriteRenderer {
 public:
     SpriteRenderer();
     ~SpriteRenderer();
     
+    void initialize(Bounds canvasBounds);
     void render(const std::vector<Sprite*>& sprites, const glm::mat4& projection);
     
 private:
@@ -30,6 +32,7 @@ private:
     
     void initShaders();
     void initQuad();
+    void setProjection();
 };
 
 #endif /* SpriteRenderer_hpp */

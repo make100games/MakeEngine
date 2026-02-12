@@ -125,13 +125,24 @@ void SpriteRenderer::initQuad() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, quadEBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     
+    // Tell OpenGL how the vertex array should be interpreted. ie: How to read out the position data nd how
+    // to read out the UV data. Location 0 is position data.
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
     
+    // Location 1 is UV data.
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
     
     glBindVertexArray(0);
+}
+
+void SpriteRenderer::initialize(Bounds canvasBounds) {
+    glUseProgram(shaderProgram);
+    GLint projectionLocation = glGetUniformLocation(shaderProgram, "uProjection");
+    
+    glm::mat4 projection = glm::ortho(canvasBounds.left, canvasBounds.right, canvasBounds.bottom, canvasBounds.top);
+    glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 }
 
 void SpriteRenderer::render(const std::vector<Sprite *> &sprites, const glm::mat4& projection) {
@@ -147,7 +158,6 @@ void SpriteRenderer::render(const std::vector<Sprite *> &sprites, const glm::mat
         
         glm::mat4 model(1.0f);
         model = glm::translate(model, glm::vec3(sprite -> position.x, sprite -> position.y, 0.0f));
-        
         model = glm::rotate(model, sprite -> rotation, glm::vec3(0, 0, 1));
         model = glm::scale(model, glm::vec3(sprite -> scale.x, sprite -> scale.y, 1.0));
         
