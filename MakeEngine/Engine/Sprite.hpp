@@ -25,7 +25,7 @@ public:
     
     Vec4 color { 1.0f, 1.0f, 1.0f, 1.0f };
     
-    // TODO add sprite sheet/atlas support later for animating sprites
+    // TODO: add sprite sheet/atlas support later for animating sprites
 };
 
 #endif /* Sprite_hpp */

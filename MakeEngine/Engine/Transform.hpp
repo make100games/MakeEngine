@@ -10,24 +10,13 @@
 
 #include <stdio.h>
 #include <string>
+#include "Vec3.hpp"
 
 struct Transform {
-    float x;
-    float y;
+    Vec3 position { 0.0f, 0.0f, 0.0f };
+    Vec3 rotation { 0.0f, 0.0f, 0.0f };
+    Vec3 scale { 1.0f, 1.0f, 1.0f };
     std::string renderTag;
-    
-    // Some convenience methods for copying a Transform and only changing a single property
-    Transform copyWithX(const float newX) const {
-        Transform t = *this;
-        t.x = newX;
-        return t;
-    }
-    
-    Transform copyWithY(const float newY) const {
-        Transform t = *this;
-        t.y = newY;
-        return t;
-    }
 };
 
 #endif /* Transform_hpp */

@@ -181,7 +181,7 @@ void OpenGlRenderer::renderFrame(const std::unordered_map<std::string, std::pair
         // shapes. Important is that the correct VAO is bound before we call drawArrays as drawArrays will apply
         // the shared shader (and whateve offset value it currently has) to the vertices of the bound VAO.
         // Making the calls in this order just seems to be kind of a clear and less error prone way of doing this.
-        glUniform2f(offsetLocation, transform.x, transform.y);
+        glUniform2f(offsetLocation, transform.position.x, transform.position.y);
         
         // Apply the color from the renderable
         auto renderable = renderBucket.second[0];

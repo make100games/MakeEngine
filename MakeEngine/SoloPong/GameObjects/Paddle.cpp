@@ -14,7 +14,7 @@
 static const std::string tag = "Paddle";
 static const float paddleVelocity = 500.0f;
 
-Paddle::Paddle(GameManager* gameManager):myTransform(Transform { 0.0f, 0.0f, tag }) {
+Paddle::Paddle(GameManager* gameManager):myTransform({.renderTag = tag }) {
     myGameManager = gameManager;
     // Note: Place top left vertex at 0,0. Otherwise you bake in an offset
     float left = 0.0f;
@@ -40,37 +40,37 @@ Paddle::~Paddle() {
 void Paddle::initialize() {
     auto xPos = (myCanvasBounds.right / 2) - (width / 2);
     auto yPos = (myCanvasBounds.bottom / 2) - (height / 2);
-    myTransform = myTransform.copyWithX(xPos);
-    myTransform = myTransform.copyWithY(yPos);
-    myCollider = Collider { myTransform.x, myTransform.y, width, height, tag, this };
+    myTransform.position = myTransform.position.copyWithX(xPos);
+    myTransform.position = myTransform.position.copyWithY(yPos);
+    myCollider = Collider { myTransform.position.x, myTransform.position.y, width, height, tag, this };
     myRigidBody = RigidBody { xVelocity, yVelocity };
 }
 
 void Paddle::update(float deltaTime) {
     // Horizontal movement
-    if(myTransform.x < myCanvasBounds.left) {
+    if(myTransform.position.x < myCanvasBounds.left) {
         xVelocity = 0.0f;
-        myTransform = myTransform.copyWithX(myCanvasBounds.left);
-    } else if((myTransform.x + width) > myCanvasBounds.right) {
+        myTransform.position = myTransform.position.copyWithX(myCanvasBounds.left);
+    } else if((myTransform.position.x + width) > myCanvasBounds.right) {
         xVelocity = 0.0f;
-        myTransform = myTransform.copyWithX(myCanvasBounds.right - width);
+        myTransform.position = myTransform.position.copyWithX(myCanvasBounds.right - width);
     } else {
-        myTransform.x += xVelocity * deltaTime;
+        myTransform.position.x += xVelocity * deltaTime;
     }
     
     // Vertical movement
     float canvasBottom = myCanvasBounds.bottom - Constants::HudHeight;
-    if(myTransform.y < myCanvasBounds.top) {
+    if(myTransform.position.y < myCanvasBounds.top) {
         yVelocity = 0.0f;
-        myTransform = myTransform.copyWithY(myCanvasBounds.top);
-    } else if((myTransform.y + height) > canvasBottom) {
+        myTransform.position = myTransform.position.copyWithY(myCanvasBounds.top);
+    } else if((myTransform.position.y + height) > canvasBottom) {
         yVelocity = 0.0f;
-        myTransform = myTransform.copyWithY(canvasBottom - height);
+        myTransform.position = myTransform.position.copyWithY(canvasBottom - height);
     } else {
-        myTransform.y += yVelocity * deltaTime;
+        myTransform.position.y += yVelocity * deltaTime;
     }
     
-    myCollider = myCollider.copyWithX(myTransform.x).copyWithY(myTransform.y);
+    myCollider = myCollider.copyWithX(myTransform.position.x).copyWithY(myTransform.position.y);
     myRigidBody = RigidBody { xVelocity, yVelocity };
 }
 
@@ -147,8 +147,8 @@ void Paddle::endGame() {
     // Reset paddle to original position
     auto xPos = (myCanvasBounds.right / 2) - (width / 2);
     auto yPos = (myCanvasBounds.bottom / 2) - (height / 2);
-    myTransform = myTransform.copyWithX(xPos);
-    myTransform = myTransform.copyWithY(yPos);
+    myTransform.position = myTransform.position.copyWithX(xPos);
+    myTransform.position = myTransform.position.copyWithY(yPos);
 }
 
 

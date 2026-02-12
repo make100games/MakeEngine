@@ -10,7 +10,7 @@
 
 static const std::string tag = "Kudos";
 
-Kudos::Kudos(float positionX, float positionY, Vec3 color): myTransform({0.0f, 0.0f, tag}) {
+Kudos::Kudos(float positionX, float positionY, Vec3 color): myTransform({.renderTag = tag}) {
     this -> positionX = positionX;
     this -> positionY = positionY;
     auto top = positionY;
@@ -41,7 +41,7 @@ float Kudos::getPositionY() {
 }
 
 void Kudos::initialize() {
-    myCollider = Collider { myTransform.x, myTransform.y, Size, Size, tag };
+    myCollider = Collider { myTransform.position.x, myTransform.position.y, Size, Size, tag };
 }
 
 void Kudos::update(float deltaTime) {

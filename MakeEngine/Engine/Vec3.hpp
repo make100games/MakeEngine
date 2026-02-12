@@ -15,6 +15,19 @@ struct Vec3 {
     float y;
     float z;
     
+    // Some convenience methods for copying a Transform and only changing a single property
+    Vec3 copyWithX(const float newX) const {
+        Vec3 t = *this;
+        t.x = newX;
+        return t;
+    }
+    
+    Vec3 copyWithY(const float newY) const {
+        Vec3 t = *this;
+        t.y = newY;
+        return t;
+    }
+    
     // Multiply vector by a scalar
     Vec3 operator*(float scalar) const {
         return { x * scalar, y * scalar, z * scalar };

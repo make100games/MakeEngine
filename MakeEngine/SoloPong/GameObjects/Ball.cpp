@@ -18,7 +18,7 @@ static const float ballVelocity = 180.0f;
 // Amount by which to gradually increase speed of ball
 static const float increaseInSpeed = 5.0f;
 
-Ball::Ball(KudosManager* kudosManager, GameManager* gameManager):myTransform(Transform {0.0f, 0.0f, tag}) {
+Ball::Ball(KudosManager* kudosManager, GameManager* gameManager):myTransform({.renderTag = tag}) {
     myGameManager = gameManager;
     myKudosManager = kudosManager;
     // Note: Place top left vertex at 0,0. Otherwise you bake in an offset
@@ -46,9 +46,9 @@ Ball::~Ball() {
 void Ball::initialize() {
     float x = (myCanvasBounds.right / 2) - (size / 2);
     float y = myCanvasBounds.top + 50;
-    myTransform = myTransform.copyWithX(x);
-    myTransform = myTransform.copyWithY(y);
-    myCollider = Collider { myTransform.x, myTransform.y, size, size, tag };
+    myTransform.position = myTransform.position.copyWithX(x);
+    myTransform.position = myTransform.position.copyWithY(y);
+    myCollider = Collider { myTransform.position.x, myTransform.position.y, size, size, tag };
     yVelocity = ballVelocity;
     myRigidBody = RigidBody { xVelocity, yVelocity };
 }
@@ -57,27 +57,27 @@ void Ball::update(float deltaTime) {
     if(myGameManager -> gameStarted()) {
         // Check collision with top or bottom of screen
         float canvasBottom = myCanvasBounds.bottom - Constants::HudHeight;
-        if(myTransform.y < myCanvasBounds.top) {
-            myTransform = myTransform.copyWithY(myCanvasBounds.top);
+        if(myTransform.position.y < myCanvasBounds.top) {
+            myTransform.position = myTransform.position.copyWithY(myCanvasBounds.top);
             yVelocity *= -1;
             myKudosManager -> loseKudos();
-        } else if((myTransform.y + size) > canvasBottom) {
-            myTransform = myTransform.copyWithY(canvasBottom - size);
+        } else if((myTransform.position.y + size) > canvasBottom) {
+            myTransform.position = myTransform.position.copyWithY(canvasBottom - size);
             yVelocity *= -1;
             myKudosManager -> loseKudos();
         }
         
-        if(myTransform.x < myCanvasBounds.left) {
-            myTransform = myTransform.copyWithX(myCanvasBounds.left);
+        if(myTransform.position.x < myCanvasBounds.left) {
+            myTransform.position = myTransform.position.copyWithX(myCanvasBounds.left);
             xVelocity *= -1;
-        } else if((myTransform.x + size) > myCanvasBounds.right) {
-            myTransform = myTransform.copyWithX(myCanvasBounds.right - size);
+        } else if((myTransform.position.x + size) > myCanvasBounds.right) {
+            myTransform.position = myTransform.position.copyWithX(myCanvasBounds.right - size);
             xVelocity *= -1;
         }
         
-        myTransform.x += xVelocity * deltaTime;
-        myTransform.y += yVelocity * deltaTime;
-        myCollider = myCollider.copyWithX(myTransform.x).copyWithY(myTransform.y);
+        myTransform.position.x += xVelocity * deltaTime;
+        myTransform.position.y += yVelocity * deltaTime;
+        myCollider = myCollider.copyWithX(myTransform.position.x).copyWithY(myTransform.position.y);
         
         increaseSpeedOverTime(deltaTime);
         
@@ -145,9 +145,9 @@ void Ball::onCollision(Collider other) {
             if(deltaX > 0) {
                 // Collided with right side
                 // Position ball at the edge of collision to avoid spurious double collisions? Not sure if this will do anything but it's an effort to fix some bugs where the ball sometimes just plows through multiple rows of bricks
-                myTransform.x = other.x + other.width;
+                myTransform.position.x = other.x + other.width;
             } else if(deltaX < 0) {
-                myTransform.x = other.x;
+                myTransform.position.x = other.x;
             }
         } else if (other.tag == "Paddle") {
             performAngleBasedBounce(other);
@@ -177,11 +177,11 @@ void Ball::performAngleBasedBounce(Collider other) {
     if(myCollider.y < other.y) {
         // Hitting top of paddle
         bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, 1 });
-        myTransform.y = other.y - size;
+        myTransform.position.y = other.y - size;
     } else if(myCollider.y > other.y) {
         // Hitting bottom of paddle
         bounceOffBallDependingOnPaddleSpeed(other, Vec2 { 0, -1 });
-        myTransform.y = other.y + other.height;
+        myTransform.position.y = other.y + other.height;
     }
     
     // Check if ball has changed direction in the y axis
@@ -230,6 +230,6 @@ void Ball::endGame() {
     
     float x = (myCanvasBounds.right / 2) - (size / 2);
     float y = myCanvasBounds.top + 50;
-    myTransform = myTransform.copyWithX(x);
-    myTransform = myTransform.copyWithY(y);
+    myTransform.position = myTransform.position.copyWithX(x);
+    myTransform.position = myTransform.position.copyWithY(y);
 }
