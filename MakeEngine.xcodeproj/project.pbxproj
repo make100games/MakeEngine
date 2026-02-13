@@ -17,6 +17,7 @@
 		8D17A5DA2F2FEF93003B7DC1 /* OpenGlRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17A5D32F2FEF93003B7DC1 /* OpenGlRenderer.cpp */; };
 		8D17A5DB2F2FEF93003B7DC1 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17A5D72F2FEF93003B7DC1 /* Engine.cpp */; };
 		8D17A5DC2F2FEF93003B7DC1 /* math_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17A5D82F2FEF93003B7DC1 /* math_utils.cpp */; };
+		8D2C98AA2F3E575C002A047D /* OpenGLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D2C98A82F3E575C002A047D /* OpenGLUtils.cpp */; };
 		8D488F0F2F3A8D1E0029BFD7 /* GameOverScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D488F0D2F3A8D1E0029BFD7 /* GameOverScreen.cpp */; };
 		8D5C0DC72F353EB3005A9CBA /* Kudos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C0DC52F353EB3005A9CBA /* Kudos.cpp */; };
 		8D5C0DCD2F35463F005A9CBA /* KudosManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C0DCB2F35463F005A9CBA /* KudosManager.cpp */; };
@@ -75,6 +76,8 @@
 		8D17A5D82F2FEF93003B7DC1 /* math_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = math_utils.cpp; sourceTree = "<group>"; };
 		8D17A5D92F2FEF93003B7DC1 /* Scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		8D2C98A72F3E526C002A047D /* Rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rocket.png; sourceTree = "<group>"; };
+		8D2C98A82F3E575C002A047D /* OpenGLUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLUtils.cpp; sourceTree = "<group>"; };
+		8D2C98A92F3E575C002A047D /* OpenGLUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLUtils.hpp; sourceTree = "<group>"; };
 		8D488F0D2F3A8D1E0029BFD7 /* GameOverScreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverScreen.cpp; sourceTree = "<group>"; };
 		8D488F0E2F3A8D1E0029BFD7 /* GameOverScreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameOverScreen.hpp; sourceTree = "<group>"; };
 		8D5C0DC52F353EB3005A9CBA /* Kudos.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Kudos.cpp; sourceTree = "<group>"; };
@@ -595,6 +598,8 @@
 				8DF282982F3BE92800D99775 /* SpriteRenderer.hpp */,
 				8D0CAE062F3DB89500BC41B3 /* SpriteRendererAdapter.cpp */,
 				8D0CAE072F3DB89500BC41B3 /* SpriteRendererAdapter.hpp */,
+				8D2C98A82F3E575C002A047D /* OpenGLUtils.cpp */,
+				8D2C98A92F3E575C002A047D /* OpenGLUtils.hpp */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -1259,6 +1264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D2C98AA2F3E575C002A047D /* OpenGLUtils.cpp in Sources */,
 				8D17A5C32F2FEE8B003B7DC1 /* main.mm in Sources */,
 				8DF282992F3BE92800D99775 /* SpriteRenderer.cpp in Sources */,
 				8D17A5DB2F2FEF93003B7DC1 /* Engine.cpp in Sources */,

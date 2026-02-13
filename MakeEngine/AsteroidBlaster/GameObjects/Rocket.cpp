@@ -12,6 +12,7 @@
 Rocket::Rocket() {
     spriteTexture = std::make_unique<Texture>("MakeEngine/AsteroidBlaster/Assets/Rocket.png");
     myRenderable = std::make_unique<Sprite>(spriteTexture.get());
+    myTransform.scale = { 50.0f, 50.0f, 1.0f };
 }
 
 Rocket::~Rocket() {

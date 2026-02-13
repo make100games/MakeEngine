@@ -9,6 +9,7 @@
 #include "SpriteRenderer.hpp"
 #include <OpenGL/gl3.h>
 #include <iostream>
+#include "OpenGLUtils.hpp"
 
 // TODO Shader should be pulled out of this class and into a separate class
 static const char* vertextShaderSource = R"(
@@ -85,7 +86,6 @@ void SpriteRenderer::initShaders() {
     shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
-    glBindAttribLocation(shaderProgram, 0, "position"); // Bind 'position' to location 0
     glLinkProgram(shaderProgram);
     
     // Check linking
@@ -132,7 +132,7 @@ void SpriteRenderer::initQuad() {
     // Tell OpenGL how the vertex array should be interpreted. ie: How to read out the position data nd how
     // to read out the UV data. Location 0 is position data.
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
     
     // Location 1 is UV data.
     glEnableVertexAttribArray(1);
@@ -147,6 +147,8 @@ void SpriteRenderer::initialize(Bounds canvasBounds) {
     
     glm::mat4 projection = glm::ortho(canvasBounds.left, canvasBounds.right, canvasBounds.bottom, canvasBounds.top);
     glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
+    
+    std::cout << "Canvas bounds left: " << canvasBounds.left << ", top: " << canvasBounds.top << ", right: " << canvasBounds.right << ", bottom: " << canvasBounds.bottom << "" <<  std::endl;
 }
 
 void SpriteRenderer::render(const std::vector<std::pair<Renderable*, Transform>>& sprites) {
@@ -178,7 +180,18 @@ void SpriteRenderer::render(const std::vector<std::pair<Renderable*, Transform>>
         glBindTexture(GL_TEXTURE_2D, sprite.first -> texture -> id());
         glUniform1i(textureLocation, 0);    // We sample from texture in texture slot 0 (since we activated GL_TEXTURE0 above)
         
+        /*
+        // Just for debugging
+        GLint currentVAO = 0;
+        glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &currentVAO);
+        std::cout << "Current VAO: " << currentVAO << std::endl;
+        
+        GLint currentProgram = 0;
+        glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram);
+        std::cout << "Current program: " << currentProgram << std::endl;*/
+        
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        checkGLError("glDrawElements");
     }
     
     glBindVertexArray(0);
