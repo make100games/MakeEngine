@@ -28,6 +28,12 @@ struct Vec3 {
         return t;
     }
     
+    Vec3 copyWithZ(const float newZ) const {
+        Vec3 t = *this;
+        t.z = newZ;
+        return t;
+    }
+    
     // Multiply vector by a scalar
     Vec3 operator*(float scalar) const {
         return { x * scalar, y * scalar, z * scalar };

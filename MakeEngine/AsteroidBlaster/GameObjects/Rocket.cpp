@@ -24,7 +24,11 @@ void Rocket::initialize() {
 }
 
 void Rocket::update(float deltaTime) {
-    
+    myTransform.position = myTransform.position.copyWithX(myTransform.position.x + (15 * deltaTime));
+    myTransform.position = myTransform.position.copyWithY(myTransform.position.y + (15 * deltaTime));
+    myTransform.rotation = myTransform.rotation.copyWithZ(myTransform.rotation.z + (2 * deltaTime));
+    myTransform.scale = myTransform.scale.copyWithX(myTransform.scale.x + (10 * deltaTime));
+    myTransform.scale = myTransform.scale.copyWithY(myTransform.scale.y + (10 * deltaTime));
 }
 
 const std::unique_ptr<Renderable>& Rocket::renderable() const {
