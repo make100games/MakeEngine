@@ -147,8 +147,6 @@ void SpriteRenderer::initialize(Bounds canvasBounds) {
     
     glm::mat4 projection = glm::ortho(canvasBounds.left, canvasBounds.right, canvasBounds.bottom, canvasBounds.top);
     glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
-    
-    std::cout << "Canvas bounds left: " << canvasBounds.left << ", top: " << canvasBounds.top << ", right: " << canvasBounds.right << ", bottom: " << canvasBounds.bottom << "" <<  std::endl;
 }
 
 void SpriteRenderer::render(const std::vector<std::pair<Renderable*, Transform>>& sprites) {
@@ -180,18 +178,7 @@ void SpriteRenderer::render(const std::vector<std::pair<Renderable*, Transform>>
         glBindTexture(GL_TEXTURE_2D, sprite.first -> texture -> id());
         glUniform1i(textureLocation, 0);    // We sample from texture in texture slot 0 (since we activated GL_TEXTURE0 above)
         
-        /*
-        // Just for debugging
-        GLint currentVAO = 0;
-        glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &currentVAO);
-        std::cout << "Current VAO: " << currentVAO << std::endl;
-        
-        GLint currentProgram = 0;
-        glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram);
-        std::cout << "Current program: " << currentProgram << std::endl;*/
-        
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        checkGLError("glDrawElements");
     }
     
     glBindVertexArray(0);
